@@ -1,58 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:id="@+id/relativeLayout">
+    android:id="@+id/relativeLayout"
+    android:orientation="vertical">
+
+
 
     <FrameLayout
+        android:layout_weight="17"
         android:id="@+id/aFramelayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="40dp">
-
-
-
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        android:layout_below="@+id/Text11"
+        android:layout_marginHorizontal="10dp">
 
     </FrameLayout>
 
 
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+        android:layout_above="@+id/line1"
+    android:background="#9D9D9D"
+    android:layout_marginBottom="5dp"
+    />
+
+
     <LinearLayout
+        android:layout_weight="1"
+        android:id="@+id/line1"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true">
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp">
 
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/home"
+            app:srcCompat="@drawable/home1"
             android:onClick="aFragment"/>
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/home"
+            app:srcCompat="@drawable/dog1"
             android:layout_weight="1"
             android:onClick="bFragment"/>
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/home"
+            app:srcCompat="@drawable/line1"
             android:layout_weight="1"
             android:onClick="cFragment"/>
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/home"
+            app:srcCompat="@drawable/user1"
             android:layout_weight="1"
             android:onClick="dFragment"/>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

@@ -36,8 +36,8 @@ public class AFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate( R.layout.afragment, container, false );
-        return view;
 
+        return view;
     }
 
 
