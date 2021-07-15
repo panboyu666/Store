@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="280dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="260dp"
+            android:layout_height="184dp"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/dog" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="地點"
+            android:layout_below="@+id/imageView"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性別"
+            android:layout_toRightOf="@+id/text1"
+            android:layout_below="@+id/imageView"
+            android:layout_marginLeft="100dp"
+            android:textSize="25dp"/>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="260dp"
+            android:layout_height="184dp"
+            android:layout_centerHorizontal="true"
+             />
+    </RelativeLayout>
+</RelativeLayout>
