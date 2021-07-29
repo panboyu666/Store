@@ -1,4 +1,4 @@
-package pan.bo.yu.store;
+package pan.bo.yu.petadoption;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+
+import pan.bo.yu.store.R;
 
 public class DFragment extends Fragment {
     //返回配置Xml文件View

@@ -1,15 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
+    <RelativeLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:id="@+id/Text11"
+            android:layout_marginHorizontal="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="廣告區域"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="7dp"
+            />
+    </RelativeLayout>
+    <ImageView
+        android:layout_below="@+id/Text11"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#9D9D9D"
+        android:layout_marginTop="8dp"
+        />
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextViewB"
-        tools:layout_editor_absoluteX="221dp"
-        tools:layout_editor_absoluteY="90dp"
-        android:textSize="30dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="17">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_product"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+           />
+
+
+        <TextView
+            android:layout_above="@+id/imageView5"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="捐贈您的愛心，您的愛心將幫助毛小孩的飼料相關物品\n及動物之家相關機構，如需捐贈收據請洽窗口
+Line:pet520" />
+
+        <TextView
+            android:layout_marginTop="40dp"
+            android:id="@+id/textView4"
+            android:layout_below="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="毛小孩之家救助會\n郵局帳號:00815580476527"
+            android:textSize="30dp"/>
+
+
+        <TextView
+            android:id="@+id/text10"
+            android:layout_below="@+id/textView4"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"/>
+
+
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/googlebilling"
+            android:layout_above="@+id/recycler_product"
+            />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/line"
+            android:layout_below="@+id/text10"
+            android:layout_marginLeft="5dp"/>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="34dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/fb"
+            android:layout_below="@+id/text10"
+            android:layout_toRightOf="@+id/imageView6"/>
+
+
+    </RelativeLayout>
+
 </LinearLayout>

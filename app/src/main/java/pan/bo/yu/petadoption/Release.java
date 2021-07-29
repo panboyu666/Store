@@ -1,8 +1,10 @@
-package pan.bo.yu.store;
+package pan.bo.yu.petadoption;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import pan.bo.yu.store.R;
 
 public class Release extends AppCompatActivity {
 

@@ -3,16 +3,22 @@
     package="pan.bo.yu.store">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="com.android.vending.BILLING" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/dogicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/dogicon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".Release"></activity>
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.Design.Light.NoActionBar"
+
+       >
+
+        <activity android:name="pan.bo.yu.petadoption.Release"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="pan.bo.yu.petadoption.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

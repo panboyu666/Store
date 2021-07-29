@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:background="#019858"
-            android:text="都直轄市"
+            android:text="六都直轄市"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="13sp"

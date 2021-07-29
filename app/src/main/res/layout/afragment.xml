@@ -17,25 +17,11 @@
             android:layout_marginHorizontal="18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="領養"
+            android:text="廣告區域"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:layout_marginTop="7dp"
             />
-
-        <TextView
-            android:id="@+id/Text12"
-            android:layout_marginHorizontal="18dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="發佈"
-            android:textSize="20sp"
-            android:textColor="#0080FF"
-            android:layout_marginTop="7dp"
-            android:layout_alignParentRight="true"
-
-            />
-
     </RelativeLayout>
 
     <ImageView
@@ -60,15 +46,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     >
-                        <Button
-                            android:id="@+id/button1"
-                            android:layout_width="100dp"
-                            android:layout_height="match_parent"
+                        <TextView
+                            android:id="@+id/TextRegion"
+                            android:layout_marginHorizontal="18dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="選擇區域"
-                            android:onClick="pp2"
-                            android:background="@drawable/mylayout"
                             android:layout_alignParentRight="true"
+                            android:textSize="20sp"
+                            android:layout_marginTop="7dp"
                             />
+
+                    <TextView
+                        android:id="@+id/TextRelease"
+                        android:layout_marginHorizontal="18dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="發佈"
+                        android:textSize="20sp"
+                        android:textColor="#0080FF"
+                        android:layout_marginTop="7dp"
+
+                        />
                 </RelativeLayout>
 
 

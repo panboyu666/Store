@@ -1,35 +1,15 @@
-package pan.bo.yu.store;
+package pan.bo.yu.petadoption;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Switch;
-import android.widget.TextView;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+
+import pan.bo.yu.store.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -69,11 +49,7 @@ public class MainActivity extends AppCompatActivity {
         pp(1);
     }
 
-    public void trunRelease(View view ){
-        Intent intent = new Intent(this,Release.class);
-        startActivity(intent);
 
-    }
 
     public void aFragment(View view ){
         pp(1);
@@ -93,20 +69,7 @@ public class MainActivity extends AppCompatActivity {
         getFragmentManager().beginTransaction().replace(R.id.aFramelayout,dFragment).commitAllowingStateLoss();
     }
 
-    public void pp2(View view){
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                final AlertDialog dialog = builder.create();
-                View dialogView = View.inflate(MainActivity.this, R.layout.dialoglayout, null);
-                dialog.setView(dialogView);
-                dialog.show();
-            }
-        },100);
 
-    }
 
     public void pp(int fragnentImage){
         imageView1.setImageResource( R.drawable.home1 );
@@ -131,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
 

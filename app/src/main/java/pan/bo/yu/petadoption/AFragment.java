@@ -1,10 +1,13 @@
-package pan.bo.yu.store;
+package pan.bo.yu.petadoption;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +17,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import pan.bo.yu.store.R;
 
 public class AFragment extends Fragment {
 
@@ -30,6 +34,8 @@ public class AFragment extends Fragment {
     ImageView  imageView2;
     ArrayList<ImageView> arrayList22 = new ArrayList<>();
     String[] sURL = new String[]{"https://images.goodsmile.info/cgm/images/product/20190925/8841/64026/large/83d0954b6bca2fdbdf736aa44387f4dd.jpg","https://i.pinimg.com/236x/10/99/0b/10990b52f7b7f8f02bbcd067ab9f1d8c.jpg"};
+
+    TextView textRegion,textRelease;
 
     //返回配置Xml文件View
     @Nullable
@@ -41,36 +47,64 @@ public class AFragment extends Fragment {
     }
 
 
-    @Override //執行後內容 跟onCreate 差不多
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        //finID前面要加view
-        //textView =view.findViewById(R.id.text1);
 
 
+        textRegion =view.findViewById( R.id.TextRegion );
+        textRelease=view.findViewById( R.id.TextRelease );
         //下面是回收視圖碼
         arrayList22.add( imageView2 );
 
         mRecyclerView = view.findViewById( R.id.recycleview );
         mRecyclerView.setLayoutManager( new LinearLayoutManager(getActivity()));
-        //這行是分隔線
+        //下行是分隔線
         mRecyclerView.addItemDecoration( new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL ) );
 
         arrayList.add( "p41" );
         arrayList.add( "p2" );
+        mRecyclerView.setAdapter( new MyListAdapter());
+       //以上回收視圖
 
-        myListAdapter = new MyListAdapter();
-        mRecyclerView.setAdapter( myListAdapter );
-        //上面那兩句也可寫成一句
-        //mRecyclerView.setAdapter( new MyListAdapter());
+
+        textRegion.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                region();
+            }
+        } );
+
+        textRelease.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Release();
+            }
+        } );
 
 
         super.onViewCreated( view, savedInstanceState );
-
+    }
+    //選擇地區方法
+    public void region(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                final AlertDialog dialog = builder.create();
+                View dialogView = View.inflate(getContext(), R.layout.dialoglayout, null);
+                dialog.setView(dialogView);
+                dialog.show();
+            }
+        },0);
 
     }
 
-
-
+    //選擇發布方法
+    public void Release(){
+        Intent intent = new Intent(getActivity(),Release.class);
+        startActivity(intent);
+    }
 
     //回收View
      public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder>{
