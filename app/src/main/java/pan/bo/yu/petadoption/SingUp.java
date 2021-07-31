@@ -40,6 +40,8 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.util.Arrays;
+
 
 public class SingUp extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
@@ -69,17 +71,15 @@ public class SingUp extends AppCompatActivity {
             }
         });
 
+
         newGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
-
-
-
-
             }
         });
 
+        //訪客按鈕
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,54 +125,66 @@ public class SingUp extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
         callbackManager = CallbackManager.Factory.create();
-
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.w("boobs","onSuccess");
+                Log.w("fragment","onSuccess");
+
 
             }
 
             @Override
             public void onCancel() {
-                Log.w("boobs","onCancel");
+                Log.w("fragment","onCancel");
             }
 
             @Override
             public void onError(FacebookException exception) {
-                Log.w("boobs","onError");
+                Log.w("fragment","onError");
             }
         });
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        Log.w("boobs","onSuccess2");
+                        Log.w("fragment","onSuccess2");
+
+                        Profile profile = Profile.getCurrentProfile();
+                        MainActivity0.userID=profile.getName();
+                        MainActivity0.editor.putString("姓名key",profile.getName());
+                        MainActivity0.editor.commit();
+
+                        Intent intent = new Intent(SingUp.this,MainActivity.class);
+                        intent.putExtra("key1",MainActivity0.userID);
+                        startActivity(intent);
+                        finish();
 
                     }
 
                     @Override
                     public void onCancel() {
-                        Log.w("boobs","onCancel2");
+                        Log.w("fragment","onCancel2");
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
-                        Log.w("boobs","onError2  "+exception);
+                        Log.w("fragment","onError2  "+exception);
                     }
                 });
+
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-        Log.w("boobs","是否已登入"+isLoggedIn);
+
+//        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+//        Log.w("result","是否已登入"+isLoggedIn);
 
         //獲取FB名字
-        Profile profile = Profile.getCurrentProfile();
+//        Profile profile = Profile.getCurrentProfile();
         //Log.w("boobs",""+ profile.getName());
 
-        //進入登入
-        // LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+
+
 
     }
     private void signIn() {
@@ -202,6 +214,7 @@ public class SingUp extends AppCompatActivity {
         }
 
     }
+
     //google 登入選擇帳號 成功登入後的後續動作
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -73,6 +74,8 @@ public class DFragment extends Fragment {
                        MainActivity0.userID=null;
                        MainActivity0.editor.putString("姓名key",null);
                        MainActivity0.editor.commit();
+                       LoginManager.getInstance().logOut();
+
                        Toast.makeText(getApplicationContext(),"已登出",Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(getApplicationContext(),SingUp.class);
                         startActivity(i);
