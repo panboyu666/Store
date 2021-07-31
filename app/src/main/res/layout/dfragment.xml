@@ -42,5 +42,16 @@
             tools:layout_editor_absoluteY="90dp"
             android:textSize="30dp"/>
 
+
+
+
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/button22"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登出"
+        />
 </LinearLayout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">領養毛小孩</string>
+    <string name="facebook_app_id">529595761429381</string>
+    <string name="fb_login_protocol_scheme">fb529595761429381</string>
 </resources>

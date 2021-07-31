@@ -90,9 +90,9 @@ public class AFragment extends Fragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 final AlertDialog dialog = builder.create();
-                View dialogView = View.inflate(getContext(), R.layout.dialoglayout, null);
+                View dialogView = View.inflate(getActivity(), R.layout.dialoglayout, null);
                 dialog.setView(dialogView);
                 dialog.show();
             }

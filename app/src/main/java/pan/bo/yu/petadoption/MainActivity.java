@@ -1,25 +1,24 @@
 package pan.bo.yu.petadoption;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.io.File;
 
 import pan.bo.yu.store.R;
 
 
 public class MainActivity extends AppCompatActivity {
-    RecyclerView mRecyclerView;
-    AFragment.MyListAdapter myListAdapter;
-    String [] sx= new String[13];
-    ArrayList<String> arrayList = new ArrayList();
-
-    ArrayList<ImageView> arrayList22 = new ArrayList<>();
-    String[] sURL = new String[]{"https://images.goodsmile.info/cgm/images/product/20190925/8841/64026/large/83d0954b6bca2fdbdf736aa44387f4dd.jpg","https://i.pinimg.com/236x/10/99/0b/10990b52f7b7f8f02bbcd067ab9f1d8c.jpg"};
 
     private AFragment aFragment;
     private BFragment bFragment;
@@ -27,13 +26,18 @@ public class MainActivity extends AppCompatActivity {
     private DFragment dFragment;
 
     private ImageView imageView1,imageView2,imageView3,imageView4;
+    String nameStr;
 
-    int fragnentImage=1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+        nameStr = intent.getStringExtra("key1");
+
 
         imageView1=findViewById( R.id.imageView1 );
         imageView2=findViewById( R.id.imageView2 );
@@ -47,10 +51,12 @@ public class MainActivity extends AppCompatActivity {
         dFragment = new DFragment();
         getFragmentManager().beginTransaction().add(R.id.aFramelayout,aFragment).commitAllowingStateLoss();
         pp(1);
+
+
     }
 
 
-
+    //跳轉Fragment的icon底色
     public void aFragment(View view ){
         pp(1);
         imageView1.setImageResource( R.drawable.home2 );
@@ -70,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    //跳轉Fragment
     public void pp(int fragnentImage){
         imageView1.setImageResource( R.drawable.home1 );
         imageView2.setImageResource( R.drawable.dog1 );
@@ -95,6 +101,65 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //離開提示
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+// 按下鍵盤上返回按鈕
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            new AlertDialog.Builder(this)
+                    .setMessage("確定退出APP嗎？")
+                    .setNegativeButton("取消",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                }
+                            })
+                    .setPositiveButton("確定",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int whichButton) {
+                                    Log.w("result","你按了確定?");
+                                    finish();
+                                }
+                            }).show();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.exit(0);
+    }
+
+    public void bww(){
+        onDestroy();
+    }
+
+    public static void deleteCache(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            deleteDir(dir);
+        } catch (Exception e) { e.printStackTrace();}
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if(dir!= null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
+    }
 
 
 }
