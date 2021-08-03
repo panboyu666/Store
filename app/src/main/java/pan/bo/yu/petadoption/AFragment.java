@@ -2,6 +2,8 @@ package pan.bo.yu.petadoption;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,10 +23,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import pan.bo.yu.store.R;
+
 
 public class AFragment extends Fragment {
 
@@ -36,7 +45,9 @@ public class AFragment extends Fragment {
     String[] sURL = new String[]{"https://images.goodsmile.info/cgm/images/product/20190925/8841/64026/large/83d0954b6bca2fdbdf736aa44387f4dd.jpg","https://i.pinimg.com/236x/10/99/0b/10990b52f7b7f8f02bbcd067ab9f1d8c.jpg"};
 
     TextView textRegion,textRelease;
-
+    //下兩行橫幅廣告
+    ClipboardManager clipboard;
+    AdView mAdView;
     //返回配置Xml文件View
     @Nullable
     @Override
@@ -81,8 +92,19 @@ public class AFragment extends Fragment {
             }
         } );
 
-
+        //橫幅廣告
+        clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        MobileAds.initialize(getActivity(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        //橫幅廣告end
         super.onViewCreated( view, savedInstanceState );
+
     }
     //選擇地區方法
     public void region(){

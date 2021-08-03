@@ -4,48 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="100"
     >
 
     <RelativeLayout
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="6"
         >
-        <TextView
-            android:id="@+id/Text11"
-            android:layout_marginHorizontal="18dp"
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="廣告區域"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="7dp"
-            />
-    </RelativeLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-4133015411524559/5902606633">
+        </com.google.android.gms.ads.AdView>
 
+    </RelativeLayout>
     <ImageView
-        android:layout_below="@+id/Text11"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#9D9D9D"
-        android:layout_marginTop="8dp"
-        />
+        android:background="#9D9D9D" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleview"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="16"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_weight="94"
                     />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    >
                         <TextView
                             android:id="@+id/TextRegion"
                             android:layout_marginHorizontal="18dp"

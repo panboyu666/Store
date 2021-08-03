@@ -12,10 +12,11 @@ android {
         applicationId "pan.bo.yu.petadoption"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 6
-        versionName "1.5v"
-
+        versionCode 7
+        versionName "1.6v"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //啟用多索引
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -54,5 +55,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
 //fb登入
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    //畢加索
+    compile 'com.squareup.picasso:picasso:2.5.2'
+//橫幅廣告
+    implementation 'com.google.android.gms:play-services-ads:20.2.0'
 
+//依賴項超過限制多索引
+    implementation 'androidx.multidex:multidex:2.0.1'
 }

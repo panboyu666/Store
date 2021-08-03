@@ -5,15 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
-import android.os.Bundle;
+
+import android.os.Handler;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -28,7 +34,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import pan.bo.yu.store.R;
+
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -40,7 +46,6 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import java.util.Arrays;
 
 
 public class SingUp extends AppCompatActivity {
@@ -50,7 +55,6 @@ public class SingUp extends AppCompatActivity {
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     private FirebaseUser fireuser;
-
 
     private Button user,newFB,newGoogle;
 
@@ -63,6 +67,7 @@ public class SingUp extends AppCompatActivity {
         newFB =findViewById(R.id.newFB);
         newGoogle =findViewById(R.id.newGoogle);
         loginButton =findViewById(R.id.login_button);
+
 
         newFB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,11 +89,12 @@ public class SingUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MainActivity0.editor.putString("姓名key","訪客");
+                MainActivity0.editor.putString("頭貼key","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6T46zuj0rKxNFyKVSu0b1pnfXAETl83CRxw&usqp=CAU");
+
                 MainActivity0.editor.commit();
                 MainActivity0.userID="訪客";
 
                 Intent intent = new Intent(SingUp.this,MainActivity.class);
-                intent.putExtra("key1",MainActivity0.userID);
                 startActivity(intent);
                 finish();
 
@@ -152,9 +158,15 @@ public class SingUp extends AppCompatActivity {
                         Log.w("fragment","onSuccess2");
 
                         Profile profile = Profile.getCurrentProfile();
+
                         MainActivity0.userID=profile.getName();
                         MainActivity0.editor.putString("姓名key",profile.getName());
+                        //得到完整FB頭貼網址
+                        String str = "https://graph.facebook.com/" + profile.getId() + "/picture?type=large";
+                        MainActivity0.editor.putString("頭貼key",str);
+
                         MainActivity0.editor.commit();
+
 
                         Intent intent = new Intent(SingUp.this,MainActivity.class);
                         intent.putExtra("key1",MainActivity0.userID);
@@ -176,21 +188,12 @@ public class SingUp extends AppCompatActivity {
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
 
-//        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-//        Log.w("result","是否已登入"+isLoggedIn);
-
-        //獲取FB名字
-//        Profile profile = Profile.getCurrentProfile();
-        //Log.w("boobs",""+ profile.getName());
-
-
-
 
     }
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-
     }
 
     @Override
@@ -213,6 +216,7 @@ public class SingUp extends AppCompatActivity {
             }
         }
 
+
     }
 
     //google 登入選擇帳號 成功登入後的後續動作
@@ -227,14 +231,16 @@ public class SingUp extends AppCompatActivity {
 
                             fireuser = mAuth.getCurrentUser();
                             MainActivity0.userID=fireuser.getDisplayName();
+                            MainActivity0.userUri=""+fireuser.getPhotoUrl();
                             MainActivity0.editor.putString("姓名key",fireuser.getDisplayName());
+                            MainActivity0.editor.putString("頭貼key",""+fireuser.getPhotoUrl());
                             MainActivity0.editor.commit();
 
 
                             Intent intent = new Intent(SingUp.this,MainActivity.class);
                             intent.putExtra("key1",MainActivity0.userID);
                             startActivity(intent);
-                            finish();
+                              finish();
 
                             // updateUI(user);
                         } else {
@@ -247,19 +253,6 @@ public class SingUp extends AppCompatActivity {
                 });
     }
 
-    //只是要判斷是否讀到使用者 可自行修改
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser user =mAuth.getCurrentUser();
-        Log.w( "boobs","user"+user );
-        if(user!=null){
-            Log.w( "boobs","帳號不等於為空" );
-            Log.w( "boobs",""+user.getDisplayName()); //獲取名字
-            Log.w( "boobs",""+user.getEmail());  //獲取信箱
-            Log.w( "boobs",""+user.getPhoneNumber());//獲取電話 無的話是null
-        }
-    }
 
     // 按下鍵盤上返回按鈕
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -285,6 +278,8 @@ public class SingUp extends AppCompatActivity {
             return super.onKeyDown(keyCode, event);
         }
     }
+
+
 
 
 

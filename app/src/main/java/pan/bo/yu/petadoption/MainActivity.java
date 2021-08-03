@@ -3,9 +3,11 @@ package pan.bo.yu.petadoption;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -13,9 +15,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
+
 import java.io.File;
 
-import pan.bo.yu.store.R;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private DFragment dFragment;
 
     private ImageView imageView1,imageView2,imageView3,imageView4;
-    String nameStr;
 
 
 
@@ -35,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        nameStr = intent.getStringExtra("key1");
+
 
 
         imageView1=findViewById( R.id.imageView1 );
@@ -51,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         dFragment = new DFragment();
         getFragmentManager().beginTransaction().add(R.id.aFramelayout,aFragment).commitAllowingStateLoss();
         pp(1);
+
+
+
 
 
     }
@@ -117,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,
                                                     int whichButton) {
-                                    Log.w("result","你按了確定?");
                                     finish();
                                 }
                             }).show();

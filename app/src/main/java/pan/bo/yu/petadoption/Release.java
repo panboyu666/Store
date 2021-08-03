@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import pan.bo.yu.store.R;
 
 public class Release extends AppCompatActivity {
 

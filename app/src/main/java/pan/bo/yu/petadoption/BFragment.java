@@ -2,8 +2,11 @@ package pan.bo.yu.petadoption;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,17 +32,24 @@ import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.Arrays;
 import java.util.List;
 
-import pan.bo.yu.store.R;
 
 public class BFragment extends Fragment implements PurchasesUpdatedListener{
     BillingClient billingClient;
     ConsumeResponseListener consumeResponselistener;
     RecyclerView recyclerView;
     TextView textView2;
+    //下兩行橫幅廣告
+    ClipboardManager clipboard;
+    AdView mAdView;
     //返回配置Xml文件View
     @Nullable
     @Override
@@ -73,8 +83,8 @@ public class BFragment extends Fragment implements PurchasesUpdatedListener{
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                boolean flage =true;
-                while(flage) {
+
+                for(int i =0; i<5 ;i++){
                     if (billingClient.isReady()) {
                         SkuDetailsParams params = SkuDetailsParams.newBuilder()
                                 .setSkusList(Arrays.asList("donate", "donate2", "donate3", "donate4"))
@@ -88,14 +98,29 @@ public class BFragment extends Fragment implements PurchasesUpdatedListener{
 
                             }
                         });
-                        flage=false;
+                        break;
                     }
 
+                    //避免迴圈過快當機
+                    SystemClock.sleep(500);
                 }
+                    if(!billingClient.isReady()){
+                        Toast.makeText(getActivity(), "網路延遲請重新載入頁面", Toast.LENGTH_SHORT).show();
+                    }
             }
         },50);
 
-
+        //橫幅廣告
+        clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        MobileAds.initialize(getActivity(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        //橫幅廣告end
 
 
     }

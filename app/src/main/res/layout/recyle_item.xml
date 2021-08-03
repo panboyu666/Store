@@ -15,7 +15,7 @@
             android:layout_width="260dp"
             android:layout_height="184dp"
             android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/dog" />
+            app:srcCompat="@drawable/load" />
 
         <TextView
             android:id="@+id/text1"

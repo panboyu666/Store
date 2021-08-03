@@ -16,7 +16,7 @@ import com.android.billingclient.api.SkuDetails;
 
 import java.util.List;
 
-import pan.bo.yu.store.R;
+
 
 public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyViewHolder> {
 
