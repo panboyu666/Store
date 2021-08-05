@@ -5,7 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="pan.bo.yu.petadoption.Release"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    >
+
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        app:srcCompat="@drawable/question"
+        />
 
     <Button
         android:id="@+id/button"
@@ -14,26 +24,111 @@
         android:text="選擇照片"
          />
 
-    <Button
-        android:id="@+id/button2"
+
+
+    <RadioGroup
+        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="開啟相機"
-       />
+        android:orientation="horizontal">
+        <RadioButton android:id="@+id/radio_pirates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是個弟弟"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_ninjas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是個妹妹"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+    <RadioGroup
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton android:id="@+id/radio_pirates2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已結紮"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_ninjas2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未結紮"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
 
+    <RadioGroup
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton android:id="@+id/radio_pirates3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打過疫苗"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_ninjas3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未打過疫苗"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_ninjass3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="不清楚"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/button15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="選擇所在地縣市"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未選擇縣市"
+            android:textSize="15sp"
+            android:textColor="#0066CC"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/button15"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="限制150字以內"/>
     <EditText
         android:id="@+id/editTextTextMultiLine"
         android:layout_width="307dp"
-        android:layout_height="270dp"
+        android:layout_height="200dp"
+        android:background="@drawable/myedit"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="編輯文字\n請輸入個性、是否有疾病、相關說明\n還有你的聯繫方式"
         android:inputType="textMultiLine"
-        />
+        android:maxLength="150"/>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="發布"
        />
+
+
+
 </LinearLayout>

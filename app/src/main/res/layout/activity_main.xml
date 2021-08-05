@@ -7,66 +7,143 @@
     android:layout_height="match_parent"
     tools:context="pan.bo.yu.petadoption.MainActivity"
     android:id="@+id/relativeLayout"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="100">
 
-
-
-    <FrameLayout
-        android:layout_weight="17"
-        android:id="@+id/aFramelayout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="10dp"
-        android:layout_below="@+id/Text11"
-        android:layout_marginHorizontal="10dp">
+        android:layout_weight="93">
+        <FrameLayout
+            android:id="@+id/aFramelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="1dp"
+            android:layout_marginHorizontal="1dp">
+        </FrameLayout>
 
-    </FrameLayout>
-
-
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-        android:layout_above="@+id/line1"
-    android:background="#9D9D9D"
-    android:layout_marginBottom="5dp"
-    />
+    </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_weight="1"
-        android:id="@+id/line1"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp">
+        android:layout_weight="7"
+        android:layout_marginBottom="1dp">
 
         <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/home1"
-            android:onClick="aFragment"/>
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/dog1"
-            android:layout_weight="1"
-            android:onClick="bFragment"/>
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/line1"
-            android:layout_weight="1"
-            android:onClick="cFragment"/>
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/user1"
-            android:layout_weight="1"
-            android:onClick="dFragment"/>
-    </LinearLayout>
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#9D9D9D" />
+
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="4"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:onClick="aFragment"
+                >
+                <ImageView
+
+                    android:id="@+id/imageView1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/home1"
+                    />
+                <TextView
+                    android:id="@+id/texrImage1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="首頁"
+                    android:textSize="15sp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:onClick="bFragment">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/dog1"
+                    />
+
+                <TextView
+                    android:id="@+id/texrImage2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="愛心捐款"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:onClick="cFragment">
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/line1"
+                    />
+                <TextView
+                    android:id="@+id/texrImage3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="聊天"
+                    android:textSize="15sp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:onClick="dFragment">
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/user1"
+                    />
+
+                <TextView
+                    android:id="@+id/texrImage4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="個人資料"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

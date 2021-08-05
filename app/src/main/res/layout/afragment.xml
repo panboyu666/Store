@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="7"
         >
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -18,66 +18,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
             ads:adUnitId="ca-app-pub-4133015411524559/5902606633">
         </com.google.android.gms.ads.AdView>
 
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#9D9D9D" />
     </RelativeLayout>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#9D9D9D" />
 
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycleview"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_marginVertical="5dp"
-                    android:layout_weight="94"
-                    />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
+        android:layout_weight="93"
         >
 
-                        <TextView
-                            android:id="@+id/TextRegion"
-                            android:layout_marginHorizontal="18dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="選擇區域"
-                            android:layout_alignParentRight="true"
-                            android:textSize="20sp"
-                            android:layout_marginTop="7dp"
-                            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
 
-                    <TextView
-                        android:id="@+id/TextRelease"
-                        android:layout_marginHorizontal="18dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="發佈"
-                        android:textSize="20sp"
-                        android:textColor="#0080FF"
-                        android:layout_marginTop="7dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="5dp"
+                android:layout_weight="95"
 
-                        />
-                </RelativeLayout>
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                >
+                <TextView
+                    android:id="@+id/TextRegion"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="選擇區域"
+                    android:layout_alignParentRight="true"
+                    android:textSize="20sp"
+                    />
+
+                <TextView
+                    android:id="@+id/TextRelease"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="發佈"
+                    android:textSize="20sp"
+                    android:textColor="#0080FF"
+                    />
 
 
+            </RelativeLayout>
 
+        </LinearLayout>
 
-
-
-
-
-
-
-
-
+        </RelativeLayout>
 
 </LinearLayout>
 

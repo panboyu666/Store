@@ -83,10 +83,10 @@ public class DFragment extends Fragment {
                    @Override
                    public void onResult(Status status) {
 
-                       MainActivity0.userID=null;
-                       MainActivity0.editor.putString("姓名key",null);
-                       MainActivity0.editor.putString("頭貼key",null);
-                       MainActivity0.editor.commit();
+                       MainActivity.userID=null;
+                       MainActivity.editor.putString("姓名key",null);
+                       MainActivity.editor.putString("頭貼key","https://miro.medium.com/max/743/1*II52xSQJ4RKcLwVMLKjgog.png");
+                       MainActivity.editor.commit();
                        //FB登出code
                        LoginManager.getInstance().logOut();
 

@@ -31,32 +31,46 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView imageView1,imageView2,imageView3,imageView4;
 
-
+    public static SharedPreferences.Editor editor;
+    public static String userID,userUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sp = getSharedPreferences("pet",MODE_PRIVATE);
+        editor = sp.edit();
+        userID = sp.getString("姓名key",null);
+        userUri= sp.getString("頭貼key",null);
+        Log.w("result",""+userID);
+
+        if(userID==null){
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,SingUp.class);
+            startActivity(intent);
+        }
+
+        setTheme(R.style.Theme_Design_Light_NoActionBar);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
 
+        if(userID!=null) {
 
+            //放在這邊原因 第一次開啟時 登入畫面會閃一下本活動 所以先判斷是否有帳戶登入再載入本活動
+            setContentView(R.layout.activity_main);
 
-        imageView1=findViewById( R.id.imageView1 );
-        imageView2=findViewById( R.id.imageView2 );
-        imageView3=findViewById( R.id.imageView3);
-        imageView4=findViewById( R.id.imageView4);
+            imageView1 = findViewById(R.id.imageView1);
+            imageView2 = findViewById(R.id.imageView2);
+            imageView3 = findViewById(R.id.imageView3);
+            imageView4 = findViewById(R.id.imageView4);
 
-        //下面是Fragment
-        aFragment = new AFragment();
-        bFragment = new BFragment();
-        cFragment = new CFragment();
-        dFragment = new DFragment();
-        getFragmentManager().beginTransaction().add(R.id.aFramelayout,aFragment).commitAllowingStateLoss();
-        pp(1);
+            //下面是Fragment
+            aFragment = new AFragment();
+            bFragment = new BFragment();
+            cFragment = new CFragment();
+            dFragment = new DFragment();
+            getFragmentManager().beginTransaction().add(R.id.aFramelayout, aFragment).commitAllowingStateLoss();
+            pp(1);
 
-
-
-
+        }
 
     }
 

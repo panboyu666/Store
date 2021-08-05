@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "pan.bo.yu.petadoption"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 30
         versionCode 7
         versionName "1.6v"
@@ -62,4 +62,6 @@ dependencies {
 
 //依賴項超過限制多索引
     implementation 'androidx.multidex:multidex:2.0.1'
+//gifView
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 }

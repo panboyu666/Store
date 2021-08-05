@@ -14,9 +14,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="aaa"
+    <style
+        name="myTheme"
+        parent="@style/Theme.AppCompat.Light">
+<!--        <item name="android:windowBackground">@drawable/dogopen</item>-->
+    </style>
 
-        />
+
+
 
 
 </resources>

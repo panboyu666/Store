@@ -10,31 +10,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
-        android:layout_weight="6">
+        android:layout_weight="7">
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
             ads:adUnitId="ca-app-pub-4133015411524559/5082503072">
         </com.google.android.gms.ads.AdView>
-    </RelativeLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/Text11"
-        android:layout_marginTop="1dp"
-        android:background="#9D9D9D" />
+        <ImageView
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#9D9D9D" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="94">
+        android:layout_weight="93">
 
         <TextView
             android:id="@+id/textView"
@@ -55,15 +52,17 @@
             android:layout_marginTop="15dp"
             app:srcCompat="@drawable/load" />
 
+        <Button
+            android:id="@+id/button22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFC78E"
+            android:fontFamily="@font/myfont"
+            android:text="登出"
+            android:textSize="25sp"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/button22"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFC78E"
-        android:fontFamily="@font/myfont"
-        android:text="登出"
-        android:textSize="25sp" />
+
 </LinearLayout>

@@ -47,7 +47,6 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 
-
 public class SingUp extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private GoogleSignInClient mGoogleSignInClient;
@@ -60,6 +59,7 @@ public class SingUp extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.Theme_Design_Light_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_up);
 
@@ -88,11 +88,11 @@ public class SingUp extends AppCompatActivity {
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity0.editor.putString("姓名key","訪客");
-                MainActivity0.editor.putString("頭貼key","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6T46zuj0rKxNFyKVSu0b1pnfXAETl83CRxw&usqp=CAU");
+                MainActivity.editor.putString("姓名key","訪客");
+                MainActivity.editor.putString("頭貼key","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6T46zuj0rKxNFyKVSu0b1pnfXAETl83CRxw&usqp=CAU");
 
-                MainActivity0.editor.commit();
-                MainActivity0.userID="訪客";
+                MainActivity.editor.commit();
+                MainActivity.userID="訪客";
 
                 Intent intent = new Intent(SingUp.this,MainActivity.class);
                 startActivity(intent);
@@ -159,17 +159,17 @@ public class SingUp extends AppCompatActivity {
 
                         Profile profile = Profile.getCurrentProfile();
 
-                        MainActivity0.userID=profile.getName();
-                        MainActivity0.editor.putString("姓名key",profile.getName());
+                        MainActivity.userID=profile.getName();
+                        MainActivity.editor.putString("姓名key",profile.getName());
                         //得到完整FB頭貼網址
                         String str = "https://graph.facebook.com/" + profile.getId() + "/picture?type=large";
-                        MainActivity0.editor.putString("頭貼key",str);
+                        MainActivity.editor.putString("頭貼key",str);
 
-                        MainActivity0.editor.commit();
+                        MainActivity.editor.commit();
 
 
                         Intent intent = new Intent(SingUp.this,MainActivity.class);
-                        intent.putExtra("key1",MainActivity0.userID);
+                        intent.putExtra("key1",MainActivity.userID);
                         startActivity(intent);
                         finish();
 
@@ -230,15 +230,15 @@ public class SingUp extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
 
                             fireuser = mAuth.getCurrentUser();
-                            MainActivity0.userID=fireuser.getDisplayName();
-                            MainActivity0.userUri=""+fireuser.getPhotoUrl();
-                            MainActivity0.editor.putString("姓名key",fireuser.getDisplayName());
-                            MainActivity0.editor.putString("頭貼key",""+fireuser.getPhotoUrl());
-                            MainActivity0.editor.commit();
+                            MainActivity.userID=fireuser.getDisplayName();
+                            MainActivity.userUri=""+fireuser.getPhotoUrl();
+                            MainActivity.editor.putString("姓名key",fireuser.getDisplayName());
+                            MainActivity.editor.putString("頭貼key",""+fireuser.getPhotoUrl());
+                            MainActivity.editor.commit();
 
 
                             Intent intent = new Intent(SingUp.this,MainActivity.class);
-                            intent.putExtra("key1",MainActivity0.userID);
+                            intent.putExtra("key1",MainActivity.userID);
                             startActivity(intent);
                               finish();
 
@@ -278,7 +278,6 @@ public class SingUp extends AppCompatActivity {
             return super.onKeyDown(keyCode, event);
         }
     }
-
 
 
 
