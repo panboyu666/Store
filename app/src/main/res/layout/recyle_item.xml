@@ -3,43 +3,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="280dp">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
 
+
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="260dp"
-            android:layout_height="184dp"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/load" />
+            android:id="@+id/imageView1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:src="@color/black" />
 
         <TextView
             android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="地點"
-            android:layout_below="@+id/imageView"
-            android:textSize="25dp"/>
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginVertical="10dp"
+            android:layout_toRightOf="@id/imageView1"
+            android:text="姓名"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="性別"
-            android:layout_toRightOf="@+id/text1"
-            android:layout_below="@+id/imageView"
-            android:layout_marginLeft="100dp"
-            android:textSize="25dp"/>
+            android:layout_below="@+id/imageView1"
+            android:layout_marginVertical="10dp"
+            android:text="說明"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"/>
+
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="260dp"
-            android:layout_height="184dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/text2"
             android:layout_centerHorizontal="true"
-             />
+            android:layout_marginVertical="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/imageView3"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/ye01"
+            android:layout_marginLeft="40dp"
+            />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@+id/imageView4"
+
+            android:background="#9D9D9D"
+            />
+
+
+
+
     </RelativeLayout>
 </RelativeLayout>

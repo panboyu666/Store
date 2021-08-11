@@ -53,15 +53,29 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.firebase:firebase-analytics'
+
 //fb登入
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
-    //畢加索
+
+//畢加索
     compile 'com.squareup.picasso:picasso:2.5.2'
+
 //橫幅廣告
     implementation 'com.google.android.gms:play-services-ads:20.2.0'
 
 //依賴項超過限制多索引
     implementation 'androidx.multidex:multidex:2.0.1'
+
 //gifView
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
+
+//FirebaseRealTime & storage
+    implementation platform('com.google.firebase:firebase-bom:28.3.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-database:20.0.1'
+    implementation 'com.google.firebase:firebase-storage'
+//壓縮機
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.4'
+//android.media.ExifInterface報錯 用這個三方庫就解決了
+    implementation 'androidx.exifinterface:exifinterface:1.3.2'
 }

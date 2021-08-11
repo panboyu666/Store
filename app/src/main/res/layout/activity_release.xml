@@ -17,6 +17,7 @@
         app:srcCompat="@drawable/question"
         />
 
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -58,6 +59,7 @@
             android:text="未結紮"
             android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
+
 
     <RadioGroup
         android:gravity="center"
@@ -127,7 +129,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="發布"
+        android:onClick="release"
        />
+
 
 
 
