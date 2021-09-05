@@ -70,7 +70,7 @@ public class DFragment extends Fragment {
         nameText.setText(preferences.getString("姓名key",""));
 
         //取得偏好頭貼
-        Picasso.with(getApplicationContext()).load(preferences.getString("頭貼key","")).into(imageView10);
+        Picasso.get().load(preferences.getString("頭貼key","")).into(imageView10);
 
 
     //登出按鈕

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/myedit.xml" value="0.3541666666666667" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/mylayout.xml" value="0.3541666666666667" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/mylayout2.xml" value="0.3541666666666667" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/activity_main.xml" value="0.3278985507246377" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/afragment.xml" value="0.31431159420289856" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/cfragment.xml" value="0.3046875" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/dialoglayout.xml" value="0.3046875" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/layout_product_display.xml" value="0.3046875" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/recycler_line_layout.xml" value="0.3046875" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/recyle_item.xml" value="0.5" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

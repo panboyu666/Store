@@ -137,8 +137,6 @@ public class SingUp extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.w("fragment","onSuccess");
-
-
             }
 
             @Override

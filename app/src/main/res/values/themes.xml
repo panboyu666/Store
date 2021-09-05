@@ -17,7 +17,7 @@
     <style
         name="myTheme"
         parent="@style/Theme.AppCompat.Light">
-<!--        <item name="android:windowBackground">@drawable/dogopen</item>-->
+        <item name="android:windowBackground">@drawable/dogopen</item>
     </style>
 
 

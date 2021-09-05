@@ -8,7 +8,8 @@
     tools:context="pan.bo.yu.petadoption.MainActivity"
     android:id="@+id/relativeLayout"
     android:orientation="vertical"
-    android:weightSum="100">
+    android:weightSum="100"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -108,7 +109,7 @@
                     android:id="@+id/texrImage3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="聊天"
+                    android:text="留言板"
                     android:textSize="15sp"
                     />
 

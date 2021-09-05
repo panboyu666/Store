@@ -31,17 +31,44 @@
 
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="93">
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextViewC"
-            tools:layout_editor_absoluteX="221dp"
-            tools:layout_editor_absoluteY="90dp"
-            android:textSize="30dp"/>
+        android:layout_weight="73">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:orientation="vertical"
+        android:weightSum="100"
+        >
+        <EditText
+            android:id="@+id/edittext_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text=""
+            android:layout_weight="70"
+            android:background="@drawable/myedit"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="3dp"
+            android:hint="說些什麼吧!"/>
+        <Button
+            android:id="@+id/button_port"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="發送"
+            android:layout_weight="30"
+            android:background="#28FF28"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="3dp"
+            />
+
+
+    </LinearLayout>
 </LinearLayout>

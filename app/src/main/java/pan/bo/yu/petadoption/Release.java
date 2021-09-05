@@ -3,13 +3,19 @@ package pan.bo.yu.petadoption;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -32,21 +38,37 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.iceteck.silicompressorr.SiliCompressor;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class Release extends AppCompatActivity {
 
-    private Button b1,b3;
+    private Button b1,b3,button15;;
     private int PICK_CONT_REQUEST=1;
     private ImageView Image1;
     private Uri uri,uri_compression;
-    private String data_list;
+    private String data_list,region_string;
     private EditText editText;
-    private TextView text4;
+    private TextView text4,regionText;
 
-    Context context=this;
-    DatabaseReference myRef2;
-    StorageReference storageReference,pic_storage;
+    private Bitmap headshot_bitmap;
+    private String headshotUri;
+    private String headshotName;
+
+    private Context context=this;
+    private DatabaseReference myRef2;
+    private StorageReference storageReference,pic_storage,hradshot_storage;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +76,14 @@ public class Release extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release);
 
-
         b1 =findViewById(R.id.button);
+        b3 =findViewById(R.id.button3);
+        button15=findViewById(R.id.button15);
         Image1 = findViewById(R.id.imageView8);
         editText=findViewById(R.id.editTextTextMultiLine);
         text4=findViewById(R.id.text4);
 
+        regionText=findViewById(R.id.regionText);
 
         //watcher 觀察文本
         TextWatcher watcher = new TextWatcher() {
@@ -76,11 +100,11 @@ public class Release extends AppCompatActivity {
                 int i = s.length();
                 int x = 150-i;
                 text4.setText("剩餘"+x+"個字");
-
             }
         };
         //觀察編輯文本
         editText.addTextChangedListener(watcher);
+
         //選擇手機內部圖片
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,9 +116,24 @@ public class Release extends AppCompatActivity {
                 startActivityForResult(intent,1);
             }
         });
-
+        //firebase 即時資料跟storage一些前置連線
         createfirebase();
 
+        SharedPreferences preferences = getSharedPreferences("pet", 0);
+
+        //得到偏好中的頭貼uri_String
+        headshotUri = preferences.getString("頭貼key","");
+
+        //得到偏好中的姓名
+        headshotName = preferences.getString("姓名key","");
+
+        //選擇地區按鈕
+        button15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                region();
+            }
+        });
     }
 
 
@@ -118,52 +157,77 @@ public class Release extends AppCompatActivity {
 
     //建立firebase母子資料路徑
     public void createfirebase(){
-
         //建立連接
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         //建立第一個母資料夾
         DatabaseReference myRef = database.getReference("datatex_mom" );
         // 建立母資料夾的子資料夾
         myRef2 = myRef.child("data_kid01");
-
+        //連線到FirebaseStorage
+        storageReference = FirebaseStorage.getInstance().getReference();
 
     }
 
     //b3按鈕發布
     public void release(View view){
-
         Toast.makeText(context, "上傳中.. 成功將自動跳轉", Toast.LENGTH_LONG).show();
-        //連線到FirebaseStorage
-        storageReference = FirebaseStorage.getInstance().getReference();
-
+        editText.setFocusable(false);
         //讀取資料總筆數跟上傳
         myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull  DataSnapshot snapshot) {
                 //得到現在總量筆數再+1
-                int id_sum= (int)snapshot.getChildrenCount()+1;
-                //上傳
-                myRef2.child(String.valueOf(id_sum)).setValue(new TextString(editText.getText().toString()));
-                //下兩行是storage
-                pic_storage = storageReference.child(id_sum+"."+data_list);   //參數是上傳檔案名稱
+                int id_sum = (int) snapshot.getChildrenCount() + 1;
+                int like=0;
+                //上傳  文字編輯框的內容,頭像姓名,縣市地區
+                myRef2.child(String.valueOf(id_sum)).setValue(new TextString(editText.getText().toString(),headshotName,region_string,like));
+
+                //上傳hradshot
+                hradshot_storage=storageReference.child("headshot/"+"headshot_"+id_sum+".jpg");
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            InputStream innn = new URL(headshotUri).openStream();
+                            hradshot_storage.putStream(innn).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    try {
+                                        innn.close();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        } catch (IOException e) {
+                            Toast.makeText(Release.this, "很抱歉出錯了"+e, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).start();
+
+
+               //上傳pet_photo
+                pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+".jpg");   //參數是上傳檔案名稱
                 pic_storage.putFile(uri_compression).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(context, "發布成功", Toast.LENGTH_SHORT).show();
-                        Intent intent_Main = new Intent(Release.this,MainActivity.class);
+                        Intent intent_Main = new Intent(Release.this, MainActivity.class);
                         startActivity(intent_Main);
+
                     }
                 });
 
             }
             @Override
             public void onCancelled(@NonNull  DatabaseError error) {
-                Toast.makeText(context, "發布失敗", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "讀取資料總筆數失敗", Toast.LENGTH_SHORT).show();
             }
         });
 
 
-    }
+
+
+    };
 
 
     @Override
@@ -183,9 +247,154 @@ public class Release extends AppCompatActivity {
             String filePath = SiliCompressor.with(this).compress(str_uri, this .getDir( "資料夾" , Context. MODE_PRIVATE));
             //壓縮後filepath轉uri
             uri_compression = Uri.parse(filePath);
+
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
+    //選擇地區方法
+    public void region() {
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Release.this);
+
+                final AlertDialog dialog = builder.create();
+                View dialogView = View.inflate(Release.this, R.layout.dialoglayout, null);
+
+                Button button1 = (Button) dialogView.findViewById(R.id.button1);
+                Button button2 = (Button) dialogView.findViewById(R.id.button2);
+                Button button3 = (Button) dialogView.findViewById(R.id.button3);
+                Button button4 = (Button) dialogView.findViewById(R.id.button4);
+                Button button5 = (Button) dialogView.findViewById(R.id.button5);
+                Button button6 = (Button) dialogView.findViewById(R.id.button6);
+                Button button7 = (Button) dialogView.findViewById(R.id.button7);
+                Button button8 = (Button) dialogView.findViewById(R.id.button8);
+                Button button9 = (Button) dialogView.findViewById(R.id.button9);
+                Button button10 = (Button) dialogView.findViewById(R.id.button10);
+                Button button11 = (Button) dialogView.findViewById(R.id.button11);
+                Button button12 = (Button) dialogView.findViewById(R.id.button12);
+                Button button13 = (Button) dialogView.findViewById(R.id.button13);
+                Button button14 = (Button) dialogView.findViewById(R.id.button14);
+                Button button15 = (Button) dialogView.findViewById(R.id.button15);
+                Button button16 = (Button) dialogView.findViewById(R.id.button16);
+                Button button17 = (Button) dialogView.findViewById(R.id.button17);
+                Button button18 = (Button) dialogView.findViewById(R.id.button18);
+                Button button19 = (Button) dialogView.findViewById(R.id.button19);
+                Button button20 = (Button) dialogView.findViewById(R.id.button20);
+                Button button21 = (Button) dialogView.findViewById(R.id.button21);
+                dialog.setView(dialogView);
+                dialog.show();
+
+                View.OnClickListener listener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Button繼承自TextView,而TextView又繼承自View,所以可以向下轉型
+                        Button btn = (Button) v;
+                        //Button一般都有一個Id(佈局文件中設定)，用以判斷到底點擊的是哪一個
+                        switch (btn.getId()) {
+                            case R.id.button1:
+                                region_string="台北市";
+                                break;
+                            case R.id.button2:
+                                region_string="新北市";
+                                break;
+                            case R.id.button3:
+                                region_string="桃園市";
+                                break;
+                            case R.id.button4:
+                                region_string="台中市";
+                                break;
+                            case R.id.button5:
+                                region_string="台南市";
+                                break;
+                            case R.id.button6:
+                                region_string="高雄市";
+                                break;
+                            case R.id.button7:
+                                region_string="新竹縣";
+                                break;
+                            case R.id.button8:
+                                region_string="苗栗縣";
+                                break;
+                            case R.id.button9:
+                                region_string="彰化縣";
+                                break;
+                            case R.id.button10:
+                                region_string="南投縣";
+                                break;
+                            case R.id.button11:
+                                region_string="雲林縣";
+                                break;
+                            case R.id.button12:
+                                region_string="嘉義縣";
+                                break;
+                            case R.id.button13:
+                                region_string="屏東縣";
+                                break;
+                            case R.id.button14:
+                                region_string="宜蘭縣";
+                                break;
+                            case R.id.button15:
+                                region_string="花蓮縣";
+                                break;
+                            case R.id.button16:
+                                region_string="台東縣";
+                                break;
+                            case R.id.button17:
+                                region_string="澎湖縣";
+                                break;
+                            case R.id.button18:
+                                region_string="金門縣";
+                                break;
+                            case R.id.button19:
+                                region_string="連江縣";
+                                break;
+                            case R.id.button20:
+                                region_string="基隆市";
+                                break;
+                            case R.id.button21:
+                                region_string="全區";
+                                break;
+                        }
+                        dialog.dismiss();
+                        regionText.setText(region_string);
+                    }
+                }; //listener end
+
+                button1.setOnClickListener(listener);
+                button2.setOnClickListener(listener);
+                button3.setOnClickListener(listener);
+                button4.setOnClickListener(listener);
+                button5.setOnClickListener(listener);
+                button6.setOnClickListener(listener);
+                button7.setOnClickListener(listener);
+                button8.setOnClickListener(listener);
+                button9.setOnClickListener(listener);
+                button10.setOnClickListener(listener);
+                button11.setOnClickListener(listener);
+                button12.setOnClickListener(listener);
+                button13.setOnClickListener(listener);
+                button14.setOnClickListener(listener);
+                button15.setOnClickListener(listener);
+                button16.setOnClickListener(listener);
+                button17.setOnClickListener(listener);
+                button18.setOnClickListener(listener);
+                button19.setOnClickListener(listener);
+                button20.setOnClickListener(listener);
+                button21.setOnClickListener(listener);
+
+
+            }
+        }, 0);
+
+
+    }
+
 
     }
