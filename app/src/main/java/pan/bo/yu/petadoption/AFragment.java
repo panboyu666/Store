@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,21 +21,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -59,6 +65,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import me.relex.circleindicator.CircleIndicator;
+import me.relex.circleindicator.CircleIndicator3;
 
 
 public class AFragment extends Fragment {
@@ -97,6 +106,12 @@ public class AFragment extends Fragment {
     //進度條
     public static ProgressBar progressBar;
 
+    public static LinearLayout linearLayout;
+
+    //0911 text
+    ViewPager2Adapter viewPager2Adapter = new ViewPager2Adapter();
+    int get_position;
+
     //返回配置Xml文件View
     @Nullable
     @Override
@@ -110,11 +125,14 @@ public class AFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
         textRegion = view.findViewById(R.id.TextRegion);
         textRelease = view.findViewById(R.id.TextRelease);
-        progressBar =view.findViewById(R.id.progressBar);
+
+
+        linearLayout= view.findViewById(R.id.layoutppp);
+
+        ProgressBar p2 = new ProgressBar(getActivity());
+        linearLayout.addView(p2,0);
 
         //下面是回收視圖碼
         mRecyclerView = view.findViewById(R.id.recycleview);
@@ -134,7 +152,6 @@ public class AFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 id_sum = (int) snapshot.getChildrenCount();
-                Log.w("result", "id_sum所有筆數已讀取:" + id_sum);
                 //dataSnapshot.getChildren() 是所有資料 但他用for 所以每個資料都會歷遍
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     //應該是映射Class 類別中code碼固定 他會自己帶入Return值 兩個String參數
@@ -157,9 +174,7 @@ public class AFragment extends Fragment {
                 mRecyclerView.setAdapter(myListAdapter);
                 mRecyclerView.scrollToPosition(myListAdapter.getItemCount()-1);
 
-               if(MainActivity.count_AFrament == MainActivity.AFragment_sum + 1) {
-                   progressBar.setVisibility(View.INVISIBLE);
-               }
+
             }
 
             @Override
@@ -194,6 +209,9 @@ public class AFragment extends Fragment {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         //橫幅廣告end
+
+
+
 
 
     }//create結束
@@ -350,8 +368,12 @@ public class AFragment extends Fragment {
 
         class ViewHolder extends RecyclerView.ViewHolder {
 
-            private ImageView imageView1, imageView3 , imageView4;
+            private ImageView imageView1, imageView4;
             private TextView text1, text2,text3,liketext;
+
+            private ViewPager2 pager2 ;
+            private CircleIndicator3 indicator3;
+
 
 
             //這裡綁定ID 注意綁定語法不一樣  finID前面需要加 super(itemView)的內容 itemView
@@ -362,9 +384,13 @@ public class AFragment extends Fragment {
                 text2 = itemView.findViewById(R.id.text2);
                 text3 = itemView.findViewById(R.id.text3);
                 imageView1 = itemView.findViewById(R.id.imageView1);
-                imageView3 = itemView.findViewById(R.id.imageView3);
                 imageView4 = itemView.findViewById(R.id.imageView4);
                 liketext = itemView.findViewById(R.id.like00);
+
+                pager2 =itemView.findViewById(R.id.viewpager2_66);
+                indicator3= itemView.findViewById(R.id.indicator);
+
+
 
             }
         }
@@ -381,7 +407,8 @@ public class AFragment extends Fragment {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
 
-            holder.imageView3.setImageResource(R.drawable.ic_loading);
+            get_position = position;
+
             holder.imageView1.setImageResource(R.drawable.ic_loading2);
 
             holder.text1.setText(arrayList_name.get(position));
@@ -390,9 +417,27 @@ public class AFragment extends Fragment {
 
             holder.liketext.setText(array_like.get(position).toString());
 
-            Glide.with(getActivity()).load(MainActivity.AFragment1[position+1]).placeholder(R.drawable.ic_loading).into(holder.imageView3);
+            holder.pager2.setAdapter(viewPager2Adapter);
+            holder.indicator3.setViewPager(holder.pager2);
 
-            Glide.with(getActivity()).load(MainActivity.AFragment2[position+1]).placeholder(R.drawable.ic_loading2).apply(RequestOptions.bitmapTransform(new RoundedCorners(30))).into(holder.imageView1);
+
+            Glide.with(getActivity()).load(MainActivity.AFragment2[position+1])
+                    .placeholder(R.drawable.ic_loading2)
+                    .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
+                    .into(new SimpleTarget<Drawable>() {
+                        @Override
+                        public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                            super.onLoadFailed(errorDrawable);
+
+                        }
+
+                        @Override
+                        public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                            holder.imageView1.setImageDrawable(resource);
+                            linearLayout.removeAllViews();
+                        }
+                    });
+
 
 
             holder.imageView4.setOnClickListener(new View.OnClickListener() {
@@ -425,6 +470,63 @@ public class AFragment extends Fragment {
         }
 
     }
+
+    public class ViewPager2Adapter extends RecyclerView.Adapter<ViewPager2Adapter.inView> {
+
+        class inView extends RecyclerView.ViewHolder {
+
+            private ImageView imageView ,imageView2;
+            public inView(@NonNull View itemView) {
+                super(itemView);
+                imageView = itemView.findViewById(R.id.viewpager2_image);
+
+
+            }
+
+        }
+
+        @NonNull
+        @Override
+        public ViewPager2Adapter.inView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ViewPager2Adapter.inView(
+                    LayoutInflater.from(parent.getContext()).inflate(
+                            R.layout.viewpager2, parent, false
+                    )
+            );
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewPager2Adapter.inView holder, int position) {
+            holder.imageView.setImageResource(R.drawable.a01);
+
+
+            switch (position){
+                case 0 :
+                    Glide.with(getActivity()).load(MainActivity.AFragment1[get_position+1]).placeholder(R.drawable.ic_loading).into(holder.imageView);
+                    break;
+                case 1 :
+                    Glide.with(getActivity()).load(MainActivity.AFragment1_2[get_position+1]).placeholder(R.drawable.load_66).into(holder.imageView);
+                    break;
+                case 2 :
+                    Glide.with(getActivity()).load(MainActivity.AFragment1_3[get_position+1]).placeholder(R.drawable.load_66).into(holder.imageView);
+                    break;
+            }
+
+
+        }
+
+
+
+        @Override
+        public int getItemCount() {
+            return 3;
+        }
+
+
+
+    }
+
+
 
 
 }

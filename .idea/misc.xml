@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/circleindicator1.xml" value="0.22604166666666667" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/circleindicator2.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/myedit.xml" value="0.3541666666666667" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/mylayout.xml" value="0.3541666666666667" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/mylayout2.xml" value="0.3541666666666667" />
@@ -12,7 +14,8 @@
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/dialoglayout.xml" value="0.3046875" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/layout_product_display.xml" value="0.3046875" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/recycler_line_layout.xml" value="0.3046875" />
-        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/recyle_item.xml" value="0.5" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/recyle_item.xml" value="0.33" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/viewpager2.xml" value="0.25" />
       </map>
     </option>
   </component>

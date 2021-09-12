@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
 
     //AFragment
     public static int AFragment_sum=0;
-
-
     public static String [] AFragment1 ;
     public static String [] AFragment2 ;
     public short like;
     public static int count_AFrament = 1;
+    public static String [] AFragment1_2 ;
+    public static String [] AFragment1_3 ;
 
 
     //CFragment
@@ -133,11 +134,15 @@ public class MainActivity extends AppCompatActivity {
                 AFragment_sum = (int) snapshot.getChildrenCount();
                 AFragment1 = new String[AFragment_sum + 1];
                 AFragment2 = new String[AFragment_sum + 1];
+                AFragment1_2 = new String[AFragment_sum + 1];
+                AFragment1_3 = new String[AFragment_sum + 1];
+
+
 
 
                 StorageReference storageRef = FirebaseStorage.getInstance().getReference();
                 StorageReference storageRef2 = FirebaseStorage.getInstance().getReference();
-
+                //頭像
                 for (int i = 1; i < AFragment_sum + 1; i++) {
                     int final2 = i;
                     storageRef2.child("headshot/headshot_" + i + ".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -151,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 count_AFrament=1;
-
+                //主照
                 for (int i = 1; i < AFragment_sum + 1; i++) {
 
                     int finalI = i;
@@ -159,22 +164,49 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            String str = uri.toString();
-                            AFragment1[finalI] = str;
-                            Log.w("result", "成功載入" + AFragment1[finalI]);
+                            AFragment1[finalI] = uri.toString();
+                            Log.w("result", "載入第幾個pet主照:"+finalI);
                             //計數載入次數
                             count_AFrament++;
 
                             //判斷是否全部家載完畢
-                            if (count_AFrament == AFragment_sum + 1) {
+                            if (count_AFrament == AFragment_sum + 1 ) {
                                 AFragment.mRecyclerView.setAdapter(AFragment.myListAdapter);
                                 AFragment.mRecyclerView.scrollToPosition(count_AFrament-2);
-                                AFragment.progressBar.setVisibility(View.INVISIBLE);
+
                             }
 
 
                         }
                     });
+
+                    storageRef.child("pet_photo/pet_photo_"+i+"_2.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            AFragment1_2[finalI] = uri.toString();
+
+                            storageRef.child("pet_photo/pet_photo_"+finalI+"_3.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    AFragment1_3[finalI] = uri.toString();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    AFragment1_3[finalI] =null;
+                                }
+                            });
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            AFragment1_2[finalI] =null;
+                        }
+                    });
+
+
+
                 }
 
             }
@@ -217,10 +249,9 @@ public class MainActivity extends AppCompatActivity {
                             String str = uri.toString();
                             CFragment1[count_CFrament] = str;
                             count_CFrament++;
-                            Log.w("result","數數多少"+count_CFrament);
+                            Log.w("result","載入了多少次聊天頭像"+count_CFrament);
                             if(count_CFrament==40){
                                 if(CFragment.CFragmant_int_x==1) {
-                                    Log.w("result","屬鼠進來刷新了");
                                     CFragment.mRecyclerView.setAdapter(CFragment.recyclerLineAdapter);
                                     CFragment.CFragmant_int_x=0;
                                 }

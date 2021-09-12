@@ -43,6 +43,7 @@
             android:textColor="@color/black"
             android:textSize="10sp" />
 
+
         <TextView
             android:id="@+id/text2"
             android:layout_width="wrap_content"
@@ -55,26 +56,35 @@
             android:textSize="18sp" />
 
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager2_66"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_below="@+id/text2"
             android:layout_centerHorizontal="true"
-            android:layout_marginVertical="10dp" />
+            android:layout_marginTop="5dp" />
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@+id/viewpager2_66"
+            app:ci_drawable_unselected="@drawable/circleindicator1"
+            app:ci_drawable="@drawable/circleindicator2"
+            />
 
         <ImageView
             android:id="@+id/image00"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/imageView3"
+            android:layout_below="@+id/indicator"
             android:background="#E0E0E0" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_below="@+id/imageView3"
+            android:layout_below="@+id/indicator"
             android:layout_marginVertical="5dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/ye01" />
@@ -83,7 +93,7 @@
             android:id="@+id/like00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView3"
+            android:layout_below="@+id/indicator"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="5dp"
             android:layout_toRightOf="@+id/imageView4"
