@@ -9,22 +9,72 @@
     android:gravity="center_horizontal"
     >
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="3"
+    android:layout_marginTop="10dp"
+    >
     <ImageView
+        android:layout_weight="1"
         android:id="@+id/imageView8"
-        android:layout_width="240dp"
-        android:layout_height="240dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:srcCompat="@drawable/question"
+        />
+    <ImageView
+        android:layout_weight="1"
+        android:id="@+id/imageView8_1"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:srcCompat="@drawable/question"
+        />
+    <ImageView
+        android:layout_weight="1"
+        android:id="@+id/imageView8_2"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         app:srcCompat="@drawable/question"
         />
 
+</LinearLayout>
 
-
-    <Button
-        android:id="@+id/button"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="選擇照片"
-         />
+        android:text="請至少上傳一張照片"
+        />
+
+    <Button
+        android:id="@+id/button_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="選擇照片1"
+        />
+    <Button
+        android:id="@+id/button_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="選擇照片2"
+        />
+    <Button
+
+        android:id="@+id/button_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="選擇照片3"
+        />
+
+
+</LinearLayout>
+
 
 
 
@@ -97,15 +147,17 @@
             android:layout_centerHorizontal="true"
 
             />
+
         <TextView
             android:id="@+id/regionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="未選擇縣市"
-            android:textSize="15sp"
-            android:textColor="#0066CC"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/button15"
+            android:text="未選擇縣市"
+            android:textColor="#0066CC"
+            android:textSize="15sp"
+            android:layout_marginHorizontal="10dp"
             />
 
     </RelativeLayout>

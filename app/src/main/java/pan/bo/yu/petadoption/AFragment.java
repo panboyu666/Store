@@ -94,7 +94,6 @@ public class AFragment extends Fragment {
     DatabaseReference myRef2 = myRef.child("data_kid01");
 
 
-
     // 目的獲得總筆數
     int id_sum;
 
@@ -103,14 +102,14 @@ public class AFragment extends Fragment {
     String region_string;
     TextView TextRegion;
 
-    //進度條
-    public static ProgressBar progressBar;
-
+    //進度條的布局
     public static LinearLayout linearLayout;
 
     //0911 text
-    ViewPager2Adapter viewPager2Adapter = new ViewPager2Adapter();
+    ViewPager2Adapter viewPager2Adapter;
     int get_position;
+    ArrayList<String> arrayList ;
+
 
     //返回配置Xml文件View
     @Nullable
@@ -129,10 +128,10 @@ public class AFragment extends Fragment {
         textRelease = view.findViewById(R.id.TextRelease);
 
 
-        linearLayout= view.findViewById(R.id.layoutppp);
+        linearLayout = view.findViewById(R.id.layoutppp);
 
         ProgressBar p2 = new ProgressBar(getActivity());
-        linearLayout.addView(p2,0);
+        linearLayout.addView(p2, 0);
 
         //下面是回收視圖碼
         mRecyclerView = view.findViewById(R.id.recycleview);
@@ -140,6 +139,7 @@ public class AFragment extends Fragment {
         layoutManager.setReverseLayout(true);
         mRecyclerView.setLayoutManager(layoutManager);
         myListAdapter = new MyListAdapter();
+
 
         //下行是分隔線
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
@@ -172,8 +172,7 @@ public class AFragment extends Fragment {
                 //放在這原因:讀取好總筆數再來顯示回收View 這樣才不會造成getItemCount 顯示組數沒辦法即時顯示
 
                 mRecyclerView.setAdapter(myListAdapter);
-                mRecyclerView.scrollToPosition(myListAdapter.getItemCount()-1);
-
+                mRecyclerView.scrollToPosition(myListAdapter.getItemCount() - 1);
 
             }
 
@@ -209,9 +208,6 @@ public class AFragment extends Fragment {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         //橫幅廣告end
-
-
-
 
 
     }//create結束
@@ -259,71 +255,71 @@ public class AFragment extends Fragment {
                         //Button一般都有一個Id(佈局文件中設定)，用以判斷到底點擊的是哪一個
                         switch (btn.getId()) {
                             case R.id.button1:
-                                region_string="台北市";
+                                region_string = "台北市";
                                 break;
                             case R.id.button2:
-                                region_string="新北市";
+                                region_string = "新北市";
                                 break;
                             case R.id.button3:
-                                region_string="桃園市";
+                                region_string = "桃園市";
                                 break;
                             case R.id.button4:
-                                region_string="台中市";
+                                region_string = "台中市";
                                 break;
                             case R.id.button5:
-                                region_string="台南市";
+                                region_string = "台南市";
                                 break;
                             case R.id.button6:
-                                region_string="高雄市";
+                                region_string = "高雄市";
                                 break;
                             case R.id.button7:
-                                region_string="新竹縣";
+                                region_string = "新竹縣";
                                 break;
                             case R.id.button8:
-                                region_string="苗栗縣";
+                                region_string = "苗栗縣";
                                 break;
                             case R.id.button9:
-                                region_string="彰化縣";
+                                region_string = "彰化縣";
                                 break;
                             case R.id.button10:
-                                region_string="南投縣";
+                                region_string = "南投縣";
                                 break;
                             case R.id.button11:
-                                region_string="雲林縣";
+                                region_string = "雲林縣";
                                 break;
                             case R.id.button12:
-                                region_string="嘉義縣";
+                                region_string = "嘉義縣";
                                 break;
                             case R.id.button13:
-                                region_string="屏東縣";
+                                region_string = "屏東縣";
                                 break;
                             case R.id.button14:
-                                region_string="宜蘭縣";
+                                region_string = "宜蘭縣";
                                 break;
                             case R.id.button15:
-                                region_string="花蓮縣";
+                                region_string = "花蓮縣";
                                 break;
                             case R.id.button16:
-                                region_string="台東縣";
+                                region_string = "台東縣";
                                 break;
                             case R.id.button17:
-                                region_string="澎湖縣";
+                                region_string = "澎湖縣";
                                 break;
                             case R.id.button18:
-                                region_string="金門縣";
+                                region_string = "金門縣";
                                 break;
                             case R.id.button19:
-                                region_string="連江縣";
+                                region_string = "連江縣";
                                 break;
                             case R.id.button20:
-                                region_string="基隆市";
+                                region_string = "基隆市";
                                 break;
                             case R.id.button21:
-                                region_string="全區";
+                                region_string = "全區";
                                 break;
                         }
                         dialog.dismiss();
-                        TextRegion.setText("目前選擇的地區是:"+region_string);
+                        TextRegion.setText("目前選擇的地區是:" + region_string);
 
                     }
                 }; //listener end
@@ -369,11 +365,10 @@ public class AFragment extends Fragment {
         class ViewHolder extends RecyclerView.ViewHolder {
 
             private ImageView imageView1, imageView4;
-            private TextView text1, text2,text3,liketext;
+            private TextView text1, text2, text3, liketext;
 
-            private ViewPager2 pager2 ;
+            private ViewPager2 pager2;
             private CircleIndicator3 indicator3;
-
 
 
             //這裡綁定ID 注意綁定語法不一樣  finID前面需要加 super(itemView)的內容 itemView
@@ -387,9 +382,8 @@ public class AFragment extends Fragment {
                 imageView4 = itemView.findViewById(R.id.imageView4);
                 liketext = itemView.findViewById(R.id.like00);
 
-                pager2 =itemView.findViewById(R.id.viewpager2_66);
-                indicator3= itemView.findViewById(R.id.indicator);
-
+                pager2 = itemView.findViewById(R.id.viewpager2_66);
+                indicator3 = itemView.findViewById(R.id.indicator);
 
 
             }
@@ -406,8 +400,17 @@ public class AFragment extends Fragment {
         @Override  //從這裡面變更設定內容 引用holder.裡面 finID的資料修改
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+            if (MainActivity.count_AFrament == MainActivity.AFragment_sum + 1) {
+                arrayList= new ArrayList<>();
+                arrayList.add(MainActivity.AFragment1[position+1]);
+                arrayList.add(MainActivity.AFragment1_2[position+1]);
+                arrayList.add(MainActivity.AFragment1_3[position+1]);
 
-            get_position = position;
+                viewPager2Adapter = new ViewPager2Adapter(arrayList);
+                holder.pager2.setAdapter(viewPager2Adapter);
+                holder.indicator3.setViewPager(holder.pager2);
+            }
+
 
             holder.imageView1.setImageResource(R.drawable.ic_loading2);
 
@@ -417,11 +420,10 @@ public class AFragment extends Fragment {
 
             holder.liketext.setText(array_like.get(position).toString());
 
-            holder.pager2.setAdapter(viewPager2Adapter);
-            holder.indicator3.setViewPager(holder.pager2);
 
 
-            Glide.with(getActivity()).load(MainActivity.AFragment2[position+1])
+            //設定頭像載入最後一張的時候 取消進度條
+            Glide.with(getActivity()).load(MainActivity.AFragment2[position + 1])
                     .placeholder(R.drawable.ic_loading2)
                     .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
                     .into(new SimpleTarget<Drawable>() {
@@ -433,27 +435,29 @@ public class AFragment extends Fragment {
 
                         @Override
                         public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+                            //頭像
                             holder.imageView1.setImageDrawable(resource);
                             linearLayout.removeAllViews();
+
                         }
                     });
 
-
-
+            //按讚功能
             holder.imageView4.setOnClickListener(new View.OnClickListener() {
-                int limit =0;
+                int limit = 0;
+
                 @Override
                 public void onClick(View v) {
                     limit++;
-                    if(limit<6){
-                    int i = Integer.parseInt(holder.liketext.getText().toString());
-                    i++;
-                    holder.liketext.setText(i+"");
-                    DatabaseReference myRef3 = database.getReference("datatex_mom/data_kid01/"+(position+1)+"/z4");
-                    myRef3.setValue(i);
+                    if (limit < 6) {
+                        int i = Integer.parseInt(holder.liketext.getText().toString());
+                        i++;
+                        holder.liketext.setText(i + "");
+                        DatabaseReference myRef3 = database.getReference("datatex_mom/data_kid01/" + (position + 1) + "/z4");
+                        myRef3.setValue(i);
                     }
-                    if(limit>5){
-                        if(limit<8) {
+                    if (limit > 5) {
+                        if (limit < 7) {
                             Toast.makeText(getActivity(), "謝謝，已到達限制", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -463,7 +467,6 @@ public class AFragment extends Fragment {
 
         }
 
-
         @Override   //顯示條列
         public int getItemCount() {
             return id_sum;
@@ -472,10 +475,16 @@ public class AFragment extends Fragment {
     }
 
     public class ViewPager2Adapter extends RecyclerView.Adapter<ViewPager2Adapter.inView> {
+        private ArrayList<String> arrayList;
+
+        ViewPager2Adapter(ArrayList<String> arrayList) {
+            this.arrayList = arrayList;
+        }
 
         class inView extends RecyclerView.ViewHolder {
 
-            private ImageView imageView ,imageView2;
+            private ImageView imageView;
+
             public inView(@NonNull View itemView) {
                 super(itemView);
                 imageView = itemView.findViewById(R.id.viewpager2_image);
@@ -497,24 +506,26 @@ public class AFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull ViewPager2Adapter.inView holder, int position) {
-            holder.imageView.setImageResource(R.drawable.a01);
 
+            Log.w("result", "三小");
 
-            switch (position){
-                case 0 :
-                    Glide.with(getActivity()).load(MainActivity.AFragment1[get_position+1]).placeholder(R.drawable.ic_loading).into(holder.imageView);
-                    break;
-                case 1 :
-                    Glide.with(getActivity()).load(MainActivity.AFragment1_2[get_position+1]).placeholder(R.drawable.load_66).into(holder.imageView);
-                    break;
-                case 2 :
-                    Glide.with(getActivity()).load(MainActivity.AFragment1_3[get_position+1]).placeholder(R.drawable.load_66).into(holder.imageView);
-                    break;
-            }
+                if (position == 0) {
+                    holder.imageView.setImageResource(R.drawable.load_66);
+                    Glide.with(getActivity()).load(arrayList.get(position)).placeholder(R.drawable.ic_loading).into(holder.imageView);
+
+                }
+                if (position == 1) {
+
+                    holder.imageView.setImageResource(R.drawable.load_66);
+                    Glide.with(getActivity()).load(arrayList.get(position)).placeholder(R.drawable.load_66).into(holder.imageView);
+                }
+                if (position == 2) {
+                    holder.imageView.setImageResource(R.drawable.load_66);
+                    Glide.with(getActivity()).load(arrayList.get(position)).placeholder(R.drawable.load_66).into(holder.imageView);
+                }
 
 
         }
-
 
 
         @Override
@@ -523,10 +534,7 @@ public class AFragment extends Fragment {
         }
 
 
-
     }
-
-
 
 
 }

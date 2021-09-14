@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     public static int AFragment_sum=0;
     public static String [] AFragment1 ;
     public static String [] AFragment2 ;
-    public short like;
     public static int count_AFrament = 1;
     public static String [] AFragment1_2 ;
     public static String [] AFragment1_3 ;
@@ -125,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void Refresh_AFragment(){
 
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("datatex_mom");
         DatabaseReference myRef2 = myRef.child("data_kid01");
@@ -138,9 +138,10 @@ public class MainActivity extends AppCompatActivity {
                 AFragment1_3 = new String[AFragment_sum + 1];
 
 
-
-
                 StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                StorageReference storageRef_2 = FirebaseStorage.getInstance().getReference();
+                StorageReference storageRef_3 = FirebaseStorage.getInstance().getReference();
+
                 StorageReference storageRef2 = FirebaseStorage.getInstance().getReference();
                 //頭像
                 for (int i = 1; i < AFragment_sum + 1; i++) {
@@ -173,35 +174,34 @@ public class MainActivity extends AppCompatActivity {
                             if (count_AFrament == AFragment_sum + 1 ) {
                                 AFragment.mRecyclerView.setAdapter(AFragment.myListAdapter);
                                 AFragment.mRecyclerView.scrollToPosition(count_AFrament-2);
-
                             }
 
 
                         }
                     });
 
-                    storageRef.child("pet_photo/pet_photo_"+i+"_2.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    storageRef_2.child("pet_photo/pet_photo_"+i+"_2.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             AFragment1_2[finalI] = uri.toString();
-
-                            storageRef.child("pet_photo/pet_photo_"+finalI+"_3.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    AFragment1_3[finalI] = uri.toString();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    AFragment1_3[finalI] =null;
-                                }
-                            });
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            AFragment1_2[finalI] =null;
+                            AFragment1_2[finalI] ="空空的";
+                        }
+                    });
+
+                    storageRef_3.child("pet_photo/pet_photo_"+finalI+"_3.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            AFragment1_3[finalI] = uri.toString();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            AFragment1_3[finalI] ="空空的";
                         }
                     });
 
@@ -223,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void Refresh_CFragment(){
+
 
         arrayTell = new ArrayList();
         arrayName = new ArrayList();
@@ -254,7 +255,9 @@ public class MainActivity extends AppCompatActivity {
                                 if(CFragment.CFragmant_int_x==1) {
                                     CFragment.mRecyclerView.setAdapter(CFragment.recyclerLineAdapter);
                                     CFragment.CFragmant_int_x=0;
-                                }
+                                    }
+                                Log.w("result","聊天全部加載結束");
+
                             }
                         }
                     });

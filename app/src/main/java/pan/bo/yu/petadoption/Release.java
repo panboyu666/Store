@@ -51,10 +51,12 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Release extends AppCompatActivity {
 
-    private Button b1,b3,button15;;
+    private Button b1,b1_2,b1_3,b3,button15;
     private int PICK_CONT_REQUEST=1;
     private ImageView Image1;
-    private Uri uri,uri_compression;
+    private ImageView Image2;
+    private ImageView Image3;
+    private Uri uri,uri_compression,uri_compression2,uri_compression3;
     private String data_list,region_string;
     private EditText editText;
     private TextView text4,regionText;
@@ -67,7 +69,8 @@ public class Release extends AppCompatActivity {
     private DatabaseReference myRef2;
     private StorageReference storageReference,pic_storage,hradshot_storage;
 
-
+    private int case_1=1;
+    public static int xxx =0;
 
 
     @Override
@@ -76,10 +79,14 @@ public class Release extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_release);
 
-        b1 =findViewById(R.id.button);
+        b1 =findViewById(R.id.button_1);
+        b1_2 =findViewById(R.id.button_2);
+        b1_3 =findViewById(R.id.button_3);
         b3 =findViewById(R.id.button3);
         button15=findViewById(R.id.button15);
         Image1 = findViewById(R.id.imageView8);
+        Image2 = findViewById(R.id.imageView8_1);
+        Image3 = findViewById(R.id.imageView8_2);
         editText=findViewById(R.id.editTextTextMultiLine);
         text4=findViewById(R.id.text4);
 
@@ -109,6 +116,7 @@ public class Release extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                case_1=1;
                 Intent intent =new Intent();
                 intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setType("image/*");
@@ -116,6 +124,35 @@ public class Release extends AppCompatActivity {
                 startActivityForResult(intent,1);
             }
         });
+
+
+        b1_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                case_1=2;
+                Intent intent =new Intent();
+                intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setType("image/*");
+                intent.setAction(intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        b1_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                case_1=3;
+                Intent intent =new Intent();
+                intent.setFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setType("image/*");
+                intent.setAction(intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,1);
+            }
+        });
+
+
+
+
         //firebase 即時資料跟storage一些前置連線
         createfirebase();
 
@@ -205,17 +242,46 @@ public class Release extends AppCompatActivity {
                     }
                 }).start();
 
+                xxx=0;
 
                //上傳pet_photo
                 pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+".jpg");   //參數是上傳檔案名稱
                 pic_storage.putFile(uri_compression).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Intent intent_Main = new Intent(Release.this, MainActivity.class);
-                        startActivity(intent_Main);
-
+                            xxx++;
+                            if(xxx==3){
+                                Intent intent_Main = new Intent(Release.this, MainActivity.class);
+                                startActivity(intent_Main);
+                            }
                     }
                 });
+
+                pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+"_2.jpg");   //參數是上傳檔案名稱
+                pic_storage.putFile(uri_compression2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        xxx++;
+                        if(xxx==3){
+                            Intent intent_Main = new Intent(Release.this, MainActivity.class);
+                            startActivity(intent_Main);
+                        }
+                    }
+                });
+
+                pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+"_3.jpg");   //參數是上傳檔案名稱
+                pic_storage.putFile(uri_compression3).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        xxx++;
+                        if(xxx==3){
+                            Intent intent_Main = new Intent(Release.this, MainActivity.class);
+                            startActivity(intent_Main);
+                        }
+                    }
+                });
+
+
 
             }
             @Override
@@ -234,19 +300,53 @@ public class Release extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //        //以下IF 打開內部檔案後的動作
         if(requestCode==PICK_CONT_REQUEST){
-            uri =data.getData();
-            //下三行 讀取檔案的副檔名  傳給data_list
-            ContentResolver contentResolver = getContentResolver();
-            MimeTypeMap mimeTypeMap =MimeTypeMap.getSingleton();
-            data_list=mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
 
-            Image1.setImageURI(uri);
-            //得到uri的字串路徑
-            String str_uri =""+uri;
-           //壓縮機三方庫語法
-            String filePath = SiliCompressor.with(this).compress(str_uri, this .getDir( "資料夾" , Context. MODE_PRIVATE));
-            //壓縮後filepath轉uri
-            uri_compression = Uri.parse(filePath);
+            switch (case_1){
+                case 1:
+                    uri =data.getData();
+                    Image1.setImageURI(uri);
+                    b1.setText("已選擇");
+                    //下三行 讀取檔案的副檔名  傳給data_list
+                    ContentResolver contentResolver = getContentResolver();
+                    MimeTypeMap mimeTypeMap =MimeTypeMap.getSingleton();
+                    data_list=mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+                    //得到uri的字串路徑
+                    String str_uri =""+uri;
+                    //壓縮機三方庫語法
+                    String filePath = SiliCompressor.with(this).compress(str_uri, this .getDir( "資料夾" , Context. MODE_PRIVATE));
+                    //壓縮後filepath轉uri
+                    uri_compression = Uri.parse(filePath);
+                    break;
+                case 2:
+                    uri =data.getData();
+                    Image2.setImageURI(uri);
+                    b1_2.setText("已選擇");
+                    //下三行 讀取檔案的副檔名  傳給data_list
+                    ContentResolver contentResolver2 = getContentResolver();
+                    MimeTypeMap mimeTypeMap2 =MimeTypeMap.getSingleton();
+                    data_list=mimeTypeMap2.getExtensionFromMimeType(contentResolver2.getType(uri));
+                    //得到uri的字串路徑
+                    String str_uri2 =""+uri;
+                    //壓縮機三方庫語法
+                    String filePath2 = SiliCompressor.with(this).compress(str_uri2, this .getDir( "資料夾" , Context. MODE_PRIVATE));
+                    //壓縮後filepath轉uri
+                    uri_compression2 = Uri.parse(filePath2);
+                    break;
+                case 3:
+                    uri =data.getData();
+                    Image3.setImageURI(uri);
+                    b1_3.setText("已選擇");
+                    //下三行 讀取檔案的副檔名  傳給data_list
+                    ContentResolver contentResolver3 = getContentResolver();
+                    MimeTypeMap mimeTypeMap3 =MimeTypeMap.getSingleton();
+                    data_list=mimeTypeMap3.getExtensionFromMimeType(contentResolver3.getType(uri));
+                    //得到uri的字串路徑
+                    String str_uri3 =""+uri;
+                    //壓縮機三方庫語法
+                    String filePath3 = SiliCompressor.with(this).compress(str_uri3, this .getDir( "資料夾" , Context. MODE_PRIVATE));
+                    //壓縮後filepath轉uri
+                    uri_compression3 = Uri.parse(filePath3);
+            }
 
         }
 
