@@ -5,13 +5,20 @@
       <map>
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/circleindicator1.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/circleindicator2.xml" value="0.22604166666666667" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/my2layout.xml" value="0.3104166666666667" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/mybutton.xml" value="0.24739583333333334" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/myedit.xml" value="0.3541666666666667" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/mylayout.xml" value="0.3541666666666667" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/mylayout2.xml" value="0.3541666666666667" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/mylayout3.xml" value="0.3764102564102564" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/drawable/mylayout4.xml" value="0.3223958333333333" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/activity_main.xml" value="0.3278985507246377" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/activity_release.xml" value="0.5" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/activity_sing_up.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/afragment.xml" value="0.31431159420289856" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/bfragment.xml" value="0.26577880718008107" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/cfragment.xml" value="0.3046875" />
+        <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/dfragment.xml" value="0.33" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/dialoglayout.xml" value="0.3046875" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/layout_product_display.xml" value="0.3046875" />
         <entry key="..\:/Users/panboyu/Desktop/Androidstudioproject/PetAdoption/app/src/main/res/layout/recycler_line_layout.xml" value="0.3046875" />

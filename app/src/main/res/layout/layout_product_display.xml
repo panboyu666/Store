@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="@string/title"
                 android:id="@+id/txt_product_name"
                 android:textColor="#000"
                 android:textSize="20sp"/>
@@ -30,14 +30,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_price"
                 android:layout_marginTop="8dp"
-                android:text="price摁為啥要用String庫"/>
+                android:text="@string/價格"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txt_dascription"
                 android:layout_marginTop="8dp"
-                android:text="txt_dascription摁為啥要用String庫"/>
+                android:text="@string/文字說明"/>
 
 
 

@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +52,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class Release extends AppCompatActivity {
 
-    private Button b1,b1_2,b1_3,b3,button15;
+    private Button b1,b1_2,b1_3,b3,button15_1;
     private int PICK_CONT_REQUEST=1;
     private ImageView Image1;
     private ImageView Image2;
@@ -72,6 +73,15 @@ public class Release extends AppCompatActivity {
     private int case_1=1;
     public static int xxx =0;
 
+    //監聽編輯框數量
+    int x_sum=250;
+
+
+    //單選按鈕所得到的值
+    private String gender,ligation,vaccine;
+    private String animal,phone;
+    private Spinner mSpinner;
+    private EditText meditTextPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +93,17 @@ public class Release extends AppCompatActivity {
         b1_2 =findViewById(R.id.button_2);
         b1_3 =findViewById(R.id.button_3);
         b3 =findViewById(R.id.button3);
-        button15=findViewById(R.id.button15);
+        button15_1=findViewById(R.id.button15);
         Image1 = findViewById(R.id.imageView8);
         Image2 = findViewById(R.id.imageView8_1);
         Image3 = findViewById(R.id.imageView8_2);
         editText=findViewById(R.id.editTextTextMultiLine);
         text4=findViewById(R.id.text4);
 
+
         regionText=findViewById(R.id.regionText);
+        mSpinner=findViewById(R.id.spinner_animal);
+        meditTextPhone=findViewById(R.id.editTextPhone);
 
         //watcher 觀察文本
         TextWatcher watcher = new TextWatcher() {
@@ -105,8 +118,8 @@ public class Release extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 int i = s.length();
-                int x = 150-i;
-                text4.setText("剩餘"+x+"個字");
+                x_sum = 250-i;
+                text4.setText("剩餘"+x_sum+"個字");
             }
         };
         //觀察編輯文本
@@ -165,12 +178,16 @@ public class Release extends AppCompatActivity {
         headshotName = preferences.getString("姓名key","");
 
         //選擇地區按鈕
-        button15.setOnClickListener(new View.OnClickListener() {
+        button15_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 region();
             }
         });
+
+
+
+
     }
 
 
@@ -178,17 +195,36 @@ public class Release extends AppCompatActivity {
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-
         // Check which radio button was clicked
         switch(view.getId()) {
-            case R.id.radio_pirates:
-                if (checked)
-                    // Pirates are the best
+            case R.id.gender_1:
+                gender="公";
                     break;
-            case R.id.radio_ninjas:
-                if (checked)
-                    // Ninjas rule
+            case R.id.gender_2:
+                gender="母";
+                break;
+            case R.id.gender_3:
+                gender="不清楚";
                     break;
+            case R.id.ligation_1:
+                ligation="已結紮";
+                break;
+            case R.id.ligation_2:
+                ligation="未結紮";
+                break;
+            case R.id.ligation_3:
+                ligation="不清楚";
+                break;
+            case R.id.vaccine_1:
+                vaccine="打過疫苗";
+                break;
+            case R.id.vaccine_2:
+                vaccine="未打過疫苗";
+                break;
+            case R.id.vaccine_3:
+                vaccine="不清楚";
+                break;
+
         }
     }
 
@@ -207,91 +243,125 @@ public class Release extends AppCompatActivity {
 
     //b3按鈕發布
     public void release(View view){
-        Toast.makeText(context, "上傳中.. 成功將自動跳轉", Toast.LENGTH_LONG).show();
-        editText.setFocusable(false);
-        //讀取資料總筆數跟上傳
-        myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull  DataSnapshot snapshot) {
-                //得到現在總量筆數再+1
-                int id_sum = (int) snapshot.getChildrenCount() + 1;
-                int like=0;
-                //上傳  文字編輯框的內容,頭像姓名,縣市地區
-                myRef2.child(String.valueOf(id_sum)).setValue(new TextString(editText.getText().toString(),headshotName,region_string,like));
 
-                //上傳hradshot
-                hradshot_storage=storageReference.child("headshot/"+"headshot_"+id_sum+".jpg");
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            InputStream innn = new URL(headshotUri).openStream();
-                            hradshot_storage.putStream(innn).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    try {
-                                        innn.close();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
+
+
+        if(uri_compression!=null
+                && region_string!=null
+                && x_sum<240
+                && !headshotName.equals("訪客")
+                && gender!=null
+                && ligation!=null
+                && vaccine!=null){
+
+            //get Spinner animal
+            String[] s =getResources().getStringArray(R.array.animal);
+            int i=mSpinner.getSelectedItemPosition();
+            animal =s[i];
+            //get phone
+            phone= meditTextPhone.getText().toString();
+
+
+
+            Toast.makeText(context, "上傳中.. 成功將自動跳轉", Toast.LENGTH_LONG).show();
+            editText.setFocusable(false);
+            //讀取資料總筆數跟上傳
+            myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                    //得到現在總量筆數再+1
+                    int id_sum = (int) snapshot.getChildrenCount() + 1;
+                    int like=0;
+
+                    /**
+                     * 數據分別為 文字編輯框,頭像姓名,縣市地區,喜歡,動物,手機,性別,結紮,疫苗
+                     * **/
+                    //上傳 數據
+                    myRef2.child(String.valueOf(id_sum)).setValue(new TextString(
+                            editText.getText().toString()
+                            ,headshotName
+                            ,region_string
+                            ,like
+                            ,animal
+                            ,phone
+                            ,gender
+                            ,ligation
+                            ,vaccine));
+
+                    //上傳hradshot
+                    hradshot_storage=storageReference.child("headshot/"+"headshot_"+id_sum+".jpg");
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                InputStream innn = new URL(headshotUri).openStream();
+                                hradshot_storage.putStream(innn).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        try {
+                                            innn.close();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
-                                }
-                            });
-                        } catch (IOException e) {
-                            Toast.makeText(Release.this, "很抱歉出錯了"+e, Toast.LENGTH_SHORT).show();
+                                });
+                            } catch (IOException e) {
+                                Toast.makeText(Release.this, "很抱歉出錯了"+e, Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                }).start();
+                    }).start();
 
-                xxx=0;
+                    xxx=0;
 
-               //上傳pet_photo
-                pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+".jpg");   //參數是上傳檔案名稱
-                pic_storage.putFile(uri_compression).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    //上傳pet_photo
+                    pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+".jpg");   //參數是上傳檔案名稱
+                    pic_storage.putFile(uri_compression).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             xxx++;
                             if(xxx==3){
                                 Intent intent_Main = new Intent(Release.this, MainActivity.class);
                                 startActivity(intent_Main);
                             }
-                    }
-                });
-
-                pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+"_2.jpg");   //參數是上傳檔案名稱
-                pic_storage.putFile(uri_compression2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        xxx++;
-                        if(xxx==3){
-                            Intent intent_Main = new Intent(Release.this, MainActivity.class);
-                            startActivity(intent_Main);
                         }
-                    }
-                });
+                    });
 
-                pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+"_3.jpg");   //參數是上傳檔案名稱
-                pic_storage.putFile(uri_compression3).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        xxx++;
-                        if(xxx==3){
-                            Intent intent_Main = new Intent(Release.this, MainActivity.class);
-                            startActivity(intent_Main);
+                    pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+"_2.jpg");   //參數是上傳檔案名稱
+                    pic_storage.putFile(uri_compression2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            xxx++;
+                            if(xxx==3){
+                                Intent intent_Main = new Intent(Release.this, MainActivity.class);
+                                startActivity(intent_Main);
+                            }
                         }
-                    }
-                });
+                    });
 
+                    pic_storage = storageReference.child("pet_photo/"+"pet_photo_"+id_sum+"_3.jpg");   //參數是上傳檔案名稱
+                    pic_storage.putFile(uri_compression3).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            xxx++;
+                            if(xxx==3){
+                                Intent intent_Main = new Intent(Release.this, MainActivity.class);
+                                startActivity(intent_Main);
+                            }
+                        }
+                    });
 
+                }
+                @Override
+                public void onCancelled(@NonNull  DatabaseError error) {
+                    Toast.makeText(context, "讀取資料總筆數失敗", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-            }
-            @Override
-            public void onCancelled(@NonNull  DatabaseError error) {
-                Toast.makeText(context, "讀取資料總筆數失敗", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
+        }else if(headshotName.equals("訪客")){
+            Toast.makeText(this, "訪客無法發布 請登入GOOGLE帳戶或FB帳戶", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, "請選擇第一張照片，及填寫完整資料", Toast.LENGTH_SHORT).show();
+        }
 
     };
 
@@ -464,6 +534,7 @@ public class Release extends AppCompatActivity {
                         }
                         dialog.dismiss();
                         regionText.setText(region_string);
+                        button15_1.setText("已選擇"+region_string);
                     }
                 }; //listener end
 

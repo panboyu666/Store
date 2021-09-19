@@ -2,4 +2,84 @@
     <string name="app_name">領養毛小孩</string>
     <string name="facebook_app_id">529595761429381</string>
     <string name="fb_login_protocol_scheme">fb529595761429381</string>
+
+    <string name="sp_name">選擇種類</string>
+    <string name="分隔線">分隔線</string>
+    <string name="首頁">首頁</string>
+    <string name="愛心捐款">愛心捐款</string>
+    <string name="聊天室">聊天室</string>
+    <string name="個人資料">個人資料</string>
+    <string name="毛小孩領養">毛小孩領養</string>
+    <string name="領養代替購買">領養代替購買</string>
+    <string name="cent">cent</string>
+    <string name="Google登入">Google 登入</string>
+    <string name="Facebook登入">Facebook 登入</string>
+    <string name="其他登入方式">────── 其他登入方式 ──────</string>
+    <string name="訪客登入">訪客登入</string>
+    <string name="說些什麼吧">說些什麼吧!</string>
+    <string name="傳送">傳送</string>
+    <string name="頭照">頭照</string>
+    <string name="讀取ID中">讀取ID中</string>
+    <string name="_1">1</string>
+    <string name="經驗值Exp">經驗值Exp</string>
+    <string name="今日簽到">今日簽到</string>
+    <string name="觀看廣告影片">觀看廣告影片</string>
+    <string name="_800_exp">+800 exp</string>
+    <string name="_300_exp">+300 exp</string>
+    <string name="登出">登出</string>
+    <string name="狗狗愛心">狗狗愛心</string>
+    <string name="六都直轄市">六都直轄市</string>
+    <string name="台北市">台北市</string>
+    <string name="新北市">新北市</string>
+    <string name="桃園市">桃園市</string>
+    <string name="台中市">台中市</string>
+    <string name="台南市">台南市</string>
+    <string name="高雄市">高雄市</string>
+    <string name="其他縣市">其他縣市</string>
+    <string name="新竹縣">新竹縣</string>
+    <string name="苗栗縣">苗栗縣</string>
+    <string name="彰化縣">彰化縣</string>
+    <string name="南投縣">南投縣</string>
+    <string name="雲林縣">雲林縣</string>
+    <string name="嘉義縣">嘉義縣</string>
+    <string name="屏東縣">屏東縣</string>
+    <string name="宜蘭縣">宜蘭縣</string>
+    <string name="花蓮縣">花蓮縣</string>
+    <string name="台東縣">台東縣</string>
+    <string name="澎湖縣">澎湖縣</string>
+    <string name="金門縣">金門縣</string>
+    <string name="連江縣">連江縣</string>
+    <string name="基隆市">基隆市</string>
+    <string name="全區">全區</string>
+    <string name="title">Title</string>
+    <string name="價格">價格</string>
+    <string name="文字說明">文字說明</string>
+    <string name="name">name</string>
+    <string name="冒號">:</string>
+    <string name="說話">說話</string>
+    <string name="聊天頭貼">聊天頭貼</string>
+    <string name="主頁頭貼">主頁頭貼</string>
+    <string name="姓名">姓名</string>
+    <string name="區域">區域</string>
+    <string name="種類">種類:</string>
+    <string name="性別">性別:</string>
+    <string name="疫苗">疫苗:</string>
+    <string name="結紮">結紮:</string>
+    <string name="電話或LINE">電話或LINE:</string>
+    <string name="說明">說明</string>
+    <string name="_0">0</string>
+    <string name="like">like</string>
+    <string name="開場圖">開場圖</string>
+
+    <string-array name="animal">
+        <item>犬</item>
+        <item>貓</item>
+        <item>鼠</item>
+        <item>兔</item>
+        <item>龜</item>
+        <item>鳥</item>
+        <item>蛇</item>
+        <item>豬</item>
+        <item>其他</item>
+    </string-array>
 </resources>

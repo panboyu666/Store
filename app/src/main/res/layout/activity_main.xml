@@ -36,13 +36,15 @@
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#9D9D9D" />
+            android:background="#9D9D9D"
+            android:contentDescription="@string/分隔線" />
 
         <LinearLayout
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="4"
+            android:baselineAligned="false"
             >
             <LinearLayout
                 android:layout_width="0dp"
@@ -58,12 +60,12 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     app:srcCompat="@drawable/home1"
-                    />
+                    android:contentDescription="@string/首頁" />
                 <TextView
                     android:id="@+id/texrImage1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="首頁"
+                    android:text="@string/首頁"
                     android:textSize="15sp"
                     />
 
@@ -81,13 +83,13 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     app:srcCompat="@drawable/dog1"
-                    />
+                    android:contentDescription="@string/愛心捐款" />
 
                 <TextView
                     android:id="@+id/texrImage2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="愛心捐款"
+                    android:text="@string/愛心捐款"
                     android:textSize="15sp"
                     />
             </LinearLayout>
@@ -104,14 +106,14 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     app:srcCompat="@drawable/line1"
-                    />
+                    android:contentDescription="@string/聊天室" />
+
                 <TextView
                     android:id="@+id/texrImage3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="留言板"
-                    android:textSize="15sp"
-                    />
+                    android:text="@string/聊天室"
+                    android:textSize="15sp" />
 
             </LinearLayout>
             <LinearLayout
@@ -126,13 +128,13 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     app:srcCompat="@drawable/user1"
-                    />
+                    android:contentDescription="@string/個人資料" />
 
                 <TextView
                     android:id="@+id/texrImage4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="個人資料"
+                    android:text="@string/個人資料"
                     android:textSize="15sp"
                     />
             </LinearLayout>

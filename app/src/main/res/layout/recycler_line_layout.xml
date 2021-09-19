@@ -16,16 +16,17 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginVertical="5dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_loading2" />
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_loading2"
+            android:contentDescription="@string/聊天頭貼" />
 
         <TextView
             android:id="@+id/textname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
-            android:text="name"
+            android:text="@string/name"
             android:textColor="@color/black" />
 
         <TextView
@@ -33,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text=":" />
+            android:text="@string/冒號" />
 
         <TextView
             android:id="@+id/texttell"
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:layout_marginTop="15dp"
-            android:text="說話" />
+            android:text="@string/說話" />
 
 
     </LinearLayout>

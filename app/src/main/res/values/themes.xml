@@ -20,7 +20,11 @@
         <item name="android:windowBackground">@drawable/dogopen</item>
     </style>
 
-
+    <!--圓角-->
+    <style name="roundedCorner" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 
 
 

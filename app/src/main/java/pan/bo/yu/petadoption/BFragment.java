@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,10 +49,12 @@ public class BFragment extends Fragment implements PurchasesUpdatedListener{
     BillingClient billingClient;
     ConsumeResponseListener consumeResponselistener;
     RecyclerView recyclerView;
-    TextView textView2;
     //下兩行橫幅廣告
     ClipboardManager clipboard;
     AdView mAdView;
+
+    ImageButton imageButton;
+    ScrollView mScrollView;
     //返回配置Xml文件View
     @Nullable
     @Override
@@ -68,8 +73,9 @@ public class BFragment extends Fragment implements PurchasesUpdatedListener{
         setupBillingClient();
 
         recyclerView= view.findViewById(R.id.recycler_product);
-        textView2 = view.findViewById(R.id.textView2);
 
+        imageButton =view.findViewById(R.id.imageView5);
+        mScrollView = view.findViewById(R.id.mScrollview);
         //以下recyclerView的基礎設置
 
         recyclerView.setHasFixedSize(true);
@@ -78,37 +84,46 @@ public class BFragment extends Fragment implements PurchasesUpdatedListener{
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),linearLayoutManager.getOrientation()));
         //
 
-        //讀取Play內購的產品 需手動新增產品ID
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
+            public void onClick(View v) {
+                //讀取Play內購的產品 需手動新增產品ID
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-                for(int i =0; i<5 ;i++){
-                    if (billingClient.isReady()) {
-                        SkuDetailsParams params = SkuDetailsParams.newBuilder()
-                                .setSkusList(Arrays.asList("donate", "donate2", "donate3", "donate4"))
-                                .setType(BillingClient.SkuType.INAPP)
-                                .build();
-                        billingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
-                            @Override
-                            public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> list) {
-                                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
-                                    loadProductToRecyclerView(list);
+                        for(int i =0; i<5 ;i++){
+                            if (billingClient.isReady()) {
+                                SkuDetailsParams params = SkuDetailsParams.newBuilder()
+                                        .setSkusList(Arrays.asList("donate", "donate2", "donate3", "donate4"))
+                                        .setType(BillingClient.SkuType.INAPP)
+                                        .build();
+                                billingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
+                                    @Override
+                                    public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> list) {
+                                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
+                                            loadProductToRecyclerView(list);
+                                        mScrollView.fullScroll(ScrollView.FOCUS_DOWN);//滑到底部
 
+                                    }
+                                });
+                                break;
                             }
-                        });
-                        break;
-                    }
 
-                    //避免迴圈過快當機
-                    SystemClock.sleep(500);
-                }
-                    if(!billingClient.isReady()){
-                        Toast.makeText(getActivity(), "網路延遲請重新載入頁面", Toast.LENGTH_SHORT).show();
+                            //避免迴圈過快當機
+                            SystemClock.sleep(500);
+                        }
+                        if(!billingClient.isReady()){
+                            Toast.makeText(getActivity(), "網路延遲請重新載入頁面", Toast.LENGTH_SHORT).show();
+                        }
                     }
+                },50);
+
             }
-        },50);
+        });
+
+
 
         //橫幅廣告
         clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -117,6 +132,8 @@ public class BFragment extends Fragment implements PurchasesUpdatedListener{
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+
+
         mAdView = view.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -184,7 +201,7 @@ public class BFragment extends Fragment implements PurchasesUpdatedListener{
     //簡單的說是顯示購買紀錄 但我不知道為什麼用到IF下的內容
     //if內容 是獲取令牌唷 ComsumeParams 這個是參數 用在billingClient.consumeAsync
     private void handleItemAlreadyPuchase(List<Purchase> purchases) {
-        StringBuilder purchasedItem = new StringBuilder(textView2.getText());
+        StringBuilder purchasedItem = new StringBuilder();
 
         for(Purchase purchase : purchases)
         {
@@ -200,8 +217,7 @@ public class BFragment extends Fragment implements PurchasesUpdatedListener{
 
         }
 
-        textView2.setText(purchasedItem.toString());
-        textView2.setVisibility(View.VISIBLE);
+
     }
 
     @Override

@@ -1,112 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mScrollview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="100">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="7"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="10">
 
-        >
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-4133015411524559/1334829750">
-        </com.google.android.gms.ads.AdView>
-
-        <ImageView
-            android:layout_alignParentBottom="true"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#9D9D9D" />
-    </RelativeLayout>
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-    <RelativeLayout
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-4133015411524559/1334829750"></com.google.android.gms.ads.AdView>
 
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="93">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="#9D9D9D" />
+        </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_product"
+
+
+        <LinearLayout
+            android:layout_weight="9"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-           />
-
-
-        <TextView
-            android:layout_above="@+id/imageView5"
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@drawable/note1" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="捐贈您的愛心，您的愛心將幫助毛小孩的飼料相關物品\n及動物之家相關機構，如需捐贈收據請洽窗口
-Line:pet520" />
-
-        <TextView
-            android:layout_marginTop="40dp"
-            android:id="@+id/textView4"
-            android:layout_below="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="毛小孩之家救助會\n郵局帳號:00815580476527"
-            android:textSize="30dp"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:src="@drawable/note2" />
 
 
-        <TextView
-            android:id="@+id/text10"
-            android:layout_below="@+id/textView4"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"/>
+            <TextView
+                android:layout_marginVertical="10dp"
+                android:id="@+id/texr_96"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/imageView5"
+                android:text="懇請您支持我們APP營運\n
+部分款項也會進行更多的認養動物機構幫助"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:fontFamily="@font/myfont"
+                />
+
+            <ImageButton
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginVertical="5dp"
+                android:id="@+id/imageView5"
+                android:background="@drawable/mylayout"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/googlebilling"
+                android:scaleType="centerCrop"
+                />
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/imageView5"
+                android:id="@+id/recycler_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            app:srcCompat="@drawable/googlebilling"
-            android:layout_above="@+id/recycler_product"
-            />
-
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:srcCompat="@drawable/line"
-            android:layout_below="@+id/text10"
-            android:layout_marginLeft="5dp"/>
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="34dp"
-            android:layout_height="30dp"
-            app:srcCompat="@drawable/fb"
-            android:layout_below="@+id/text10"
-            android:layout_toRightOf="@+id/imageView6"/>
+        </LinearLayout>
 
 
-    </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
 
-</LinearLayout>

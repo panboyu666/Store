@@ -12,10 +12,10 @@
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="毛小孩領養"
+        android:text="@string/毛小孩領養"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70sp"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textColor="@color/white"
         android:fontFamily="@font/myfont"/>
 
@@ -23,7 +23,7 @@
         android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="領養代替購買"
+        android:text="@string/領養代替購買"
         android:textColor="@color/white"
         android:layout_below="@+id/text1"
         android:layout_centerHorizontal="true"
@@ -35,7 +35,7 @@
         android:layout_width="1dp"
         android:layout_height="1dp"
         android:layout_centerVertical="true"
-        android:text="cent"
+        android:text="@string/cent"
         android:layout_centerHorizontal="true"
         />
 
@@ -59,7 +59,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
         android:gravity="center"
-        android:text="Google 登入"
+        android:text="@string/Google登入"
         android:textAllCaps="false"
         android:textColor="@color/black"
 
@@ -83,7 +83,7 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:textAllCaps="false"
-        android:text="Facebook 登入"
+        android:text="@string/Facebook登入"
         android:textColor="#ffffff"
         />
     <TextView
@@ -92,7 +92,7 @@
         android:layout_height="40dp"
         android:layout_below="@+id/newFB"
         android:layout_marginTop="15dp"
-        android:text="────── 其他登入方式 ──────"
+        android:text="@string/其他登入方式"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:textColor="@color/white"
@@ -107,7 +107,7 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:textAllCaps="false"
-        android:text="訪客登入"
+        android:text="@string/訪客登入"
         android:textColor="@color/black"
         />
 

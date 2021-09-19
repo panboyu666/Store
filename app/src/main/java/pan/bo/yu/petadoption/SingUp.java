@@ -88,6 +88,9 @@ public class SingUp extends AppCompatActivity {
         user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(getApplication(), "訪客不能發布，聊天，等相關功能,完整功能請登入GOOGLE或FB帳戶", Toast.LENGTH_SHORT).show();
+
                 MainActivity.editor.putString("姓名key","訪客");
                 MainActivity.editor.putString("頭貼key","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6T46zuj0rKxNFyKVSu0b1pnfXAETl83CRxw&usqp=CAU");
 

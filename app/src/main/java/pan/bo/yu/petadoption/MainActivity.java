@@ -1,5 +1,7 @@
 package pan.bo.yu.petadoption;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,14 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.AdapterStatus;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -58,7 +68,9 @@ public class MainActivity extends AppCompatActivity {
     public static int AFragment_sum=0;
     public static String [] AFragment1 ;
     public static String [] AFragment2 ;
-    public static int count_AFrament = 1;
+    public static int count_AFrament1 = 1;
+    public static int count_AFrament2 = 1;
+    public static int count_AFrament3 = 1;
     public static String [] AFragment1_2 ;
     public static String [] AFragment1_3 ;
 
@@ -78,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         SharedPreferences sp = getSharedPreferences("pet", MODE_PRIVATE);
+
         editor = sp.edit();
         userID = sp.getString("姓名key", null);
         userUri = sp.getString("頭貼key", null);
@@ -109,17 +122,19 @@ public class MainActivity extends AppCompatActivity {
             cFragment = new CFragment();
             dFragment = new DFragment();
 
-
+            //刷新A片段數據
             Refresh_AFragment();
 
             getFragmentManager().beginTransaction().add(R.id.aFramelayout, aFragment).commitAllowingStateLoss();
             pp(1);
 
 
-
             //刷新C片段數據
             Refresh_CFragment();
+
+
         }
+
     }
 
     public static void Refresh_AFragment(){
@@ -155,8 +170,10 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
 
-
-                count_AFrament=1;
+            //判斷三個照片是否都已經全部就緒
+                count_AFrament1=1;
+                count_AFrament2=1;
+                count_AFrament3=1;
                 //主照
                 for (int i = 1; i < AFragment_sum + 1; i++) {
 
@@ -168,12 +185,12 @@ public class MainActivity extends AppCompatActivity {
                             AFragment1[finalI] = uri.toString();
                             Log.w("result", "載入第幾個pet主照:"+finalI);
                             //計數載入次數
-                            count_AFrament++;
+                            count_AFrament1++;
 
                             //判斷是否全部家載完畢
-                            if (count_AFrament == AFragment_sum + 1 ) {
+                            if (count_AFrament1 == AFragment_sum + 1 && count_AFrament2==AFragment_sum+1 && count_AFrament3==AFragment_sum+1 ) {
                                 AFragment.mRecyclerView.setAdapter(AFragment.myListAdapter);
-                                AFragment.mRecyclerView.scrollToPosition(count_AFrament-2);
+                                AFragment.mRecyclerView.scrollToPosition(count_AFrament1-2);
                             }
 
 
@@ -184,6 +201,12 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             AFragment1_2[finalI] = uri.toString();
+                            count_AFrament2++;
+                            //判斷是否全部家載完畢
+                            if (count_AFrament1 == AFragment_sum + 1 && count_AFrament2==AFragment_sum+1 && count_AFrament3==AFragment_sum+1 ) {
+                                AFragment.mRecyclerView.setAdapter(AFragment.myListAdapter);
+                                AFragment.mRecyclerView.scrollToPosition(count_AFrament1-2);
+                            }
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -197,6 +220,13 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             AFragment1_3[finalI] = uri.toString();
+                            count_AFrament3++;
+
+                            if (count_AFrament1 == AFragment_sum + 1 && count_AFrament2==AFragment_sum+1 && count_AFrament3==AFragment_sum+1 ) {
+                                AFragment.mRecyclerView.setAdapter(AFragment.myListAdapter);
+                                AFragment.mRecyclerView.scrollToPosition(count_AFrament1-2);
+                            }
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -240,31 +270,44 @@ public class MainActivity extends AppCompatActivity {
                 //抓取聊天頭貼 倒數40個
 
                 StorageReference storRf = FirebaseStorage.getInstance().getReference();;
-                for( int i = id_sum-40 ;i<id_sum;i++){
+
+                id_sum-=39;
+
+                for( int i = 0; i<40;i++){
                     int finalII = i;
 
-                    storRf.child("tell_headshot/"+(i+1)+".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    storRf.child("tell_headshot/"+(id_sum+i)+".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
 
-                            String str = uri.toString();
-                            CFragment1[count_CFrament] = str;
+                            Log.w("dddd","finalII"+finalII);
+                            //這裡重要 影響了圖像是否錯亂載入的問題
+                            int i = finalII;
+                            CFragment1[i] = uri.toString();
+                            Log.w("dddd","CFragment1[finalII]"+ CFragment1[i]);
+
+                            //
+                            //如果用  CFragment1[finalII] = uri.toString();
+                            //在還沒生成uri.toString();的時候 finalII又被刷新 變更變量
+                            //導致圖片錯亂 可能生成某個陣列裡面帶的變數不是正常的
+                            //所以新增一個int 每次迴圈都是全新的 就算來不及加載 下個迴圈 又會產生新的int 不影響舊的INT
+                            //
+
+
                             count_CFrament++;
-                            Log.w("result","載入了多少次聊天頭像"+count_CFrament);
+                            Log.w("result","載入了多少次迴圈聊天頭像"+count_CFrament);
                             if(count_CFrament==40){
                                 if(CFragment.CFragmant_int_x==1) {
-                                    CFragment.mRecyclerView.setAdapter(CFragment.recyclerLineAdapter);
+
+//                                    CFragment.mRecyclerView.setAdapter(CFragment.recyclerLineAdapter);
                                     CFragment.CFragmant_int_x=0;
                                     }
-                                Log.w("result","聊天全部加載結束");
+                                Log.w("result","聊天for迴圈全部加載結束");
 
                             }
                         }
                     });
-                }  //抓取聊天頭貼 倒數40個 end
-
-
-
+                }//抓取聊天頭貼 倒數40個 end
 
                 //歷變 即時資料所有數據 name 跟 text
                 for (DataSnapshot ds : snapshot.getChildren()) {
@@ -273,8 +316,12 @@ public class MainActivity extends AppCompatActivity {
                     //-- 白話文就是 user_data可以使用類別中getZ1()
                     TextString user_data = ds.getValue(TextString.class);
 
+                    /*這裡邏輯是 因為每個ds都會歷遍一次
+                     所以新增一個dataInt
+                     迴圈到id_sum 總數是-40的所以 IF迴圈跑到我要的範圍就新增array資料
+                     */
                     dataInt++;
-                            if(dataInt>id_sum-40) {
+                            if(dataInt>id_sum-1) {
                                 arrayName.add(user_data.getZ2());
                                 arrayTell.add(user_data.getZ1());
                             }

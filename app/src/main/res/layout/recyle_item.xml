@@ -17,7 +17,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="10dp" />
+            android:layout_marginVertical="10dp"
+            android:contentDescription="@string/主頁頭貼" />
 
         <TextView
             android:id="@+id/text1"
@@ -26,32 +27,86 @@
             android:layout_centerHorizontal="true"
 
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/imageView1"
+            android:layout_toEndOf="@id/imageView1"
             android:fontFamily="@font/myfont"
-            android:text="姓名"
+            android:text="@string/姓名"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
         <TextView
+
             android:id="@+id/text3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text1"
             android:layout_centerHorizontal="true"
-            android:layout_toRightOf="@id/imageView1"
-            android:text="區域"
+            android:layout_toEndOf="@id/imageView1"
+            android:text="@string/區域"
             android:textColor="@color/black"
-            android:textSize="10sp" />
+            android:textSize="11sp" />
 
+
+        <LinearLayout
+
+            android:id="@+id/layout"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_toEndOf="@+id/text1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mTextanimal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/種類" />
+
+            <TextView
+                android:id="@+id/mTextgender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/性別" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/layout"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mTextvaccine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/疫苗" />
+
+            <TextView
+                android:id="@+id/mTextligation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/結紮" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mTextphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout"
+            android:layout_marginStart="40dp"
+            android:layout_toEndOf="@+id/text1"
+            android:text="@string/電話或LINE" />
 
         <TextView
             android:id="@+id/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView1"
-            android:layout_marginVertical="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="說明"
+            android:layout_marginVertical="15dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/說明"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -69,16 +124,16 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:layout_below="@+id/viewpager2_66"
-            app:ci_drawable_unselected="@drawable/circleindicator1"
             app:ci_drawable="@drawable/circleindicator2"
-            />
+            app:ci_drawable_unselected="@drawable/circleindicator1" />
 
         <ImageView
             android:id="@+id/image00"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@+id/indicator"
-            android:background="#E0E0E0" />
+            android:background="#E0E0E0"
+            android:contentDescription="@string/分隔線" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -86,8 +141,9 @@
             android:layout_height="20dp"
             android:layout_below="@+id/indicator"
             android:layout_marginVertical="5dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/ye01" />
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ye01"
+            android:contentDescription="@string/like" />
 
         <TextView
             android:id="@+id/like00"
@@ -96,14 +152,16 @@
             android:layout_below="@+id/indicator"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="5dp"
-            android:layout_toRightOf="@+id/imageView4"
-            android:text="0" />
+            android:layout_toEndOf="@+id/imageView4"
+            android:text="@string/_0" />
+
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="match_parent"
             android:layout_height="15dp"
             android:layout_below="@+id/imageView4"
-            android:background="#E0E0E0" />
+            android:background="#E0E0E0"
+            android:contentDescription="@string/分隔線" />
 
 
     </RelativeLayout>

@@ -26,11 +26,13 @@
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#9D9D9D" />
+            android:background="#9D9D9D"
+            android:contentDescription="@string/分隔線" />
     </RelativeLayout>
 
 
     <RelativeLayout
+        android:id="@+id/relativelayou_c"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="73">
@@ -57,17 +59,18 @@
             android:background="@drawable/myedit"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="3dp"
-            android:hint="說些什麼吧!"/>
+            android:hint="@string/說些什麼吧"/>
+
         <Button
             android:id="@+id/button_port"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="發送"
-            android:layout_weight="30"
-            android:background="#28FF28"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="3dp"
-            />
+            android:layout_weight="30"
+            android:background="@drawable/mylayout2"
+            android:text="@string/傳送"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>

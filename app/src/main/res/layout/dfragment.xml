@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -25,13 +24,25 @@
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#9D9D9D" />
+            android:background="#9D9D9D"
+            android:contentDescription="@string/分隔線" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="93">
+        android:layout_weight="50">
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/mylayout"
+            app:srcCompat="@drawable/load"
+            android:contentDescription="@string/頭照" />
+
 
         <TextView
             android:id="@+id/textView"
@@ -40,29 +51,193 @@
             android:layout_below="@id/imageView10"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/myfont"
-            android:text="讀取ID中"
+            android:text="@string/讀取ID中"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/imagelove"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="220dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/love1" />
+
+        <TextView
+            android:id="@+id/lV"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="70dp"
+
+            android:layout_toEndOf="@id/imagelove"
+            android:text="@string/_1"
+            android:textColor="#EA0000"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+        <FrameLayout
+
+            android:id="@+id/frame"
+            android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            app:srcCompat="@drawable/load" />
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="0dp">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/mylayout4"
+                />
+
+            <com.moos.library.HorizontalProgressView
+                android:id="@+id/progressView_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="15dp"
+                app:corner_radius="12dp"
+                app:end_color="#FF0000"
+                app:end_progress="100"
+                app:isTracked="true"
+                app:progressTextColor="#FFFFFF"
+                app:start_color="#FFC1E0"
+                app:trackColor="#E0E0E0"
+                app:track_width="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="@string/經驗值Exp"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:gravity="center|top"
+
+                />
+
+        </FrameLayout>
+
 
         <Button
-            android:id="@+id/button22"
-            android:layout_width="match_parent"
+            android:id="@+id/button_date"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/button_2"
+            android:layout_marginStart="5dp"
+            android:text="@string/今日簽到"
+            android:textColor="#ff0066cc"
+            android:textStyle="bold"
+            android:background="@drawable/mybutton"
+            />
+
+        <Button
+            android:layout_marginVertical="5dp"
+            android:textColor="#ff0066cc"
+            android:id="@+id/button_2"
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/frame"
+            android:layout_marginStart="5dp"
+            android:text="@string/觀看廣告影片"
+            android:textStyle="bold"
+            android:background="@drawable/mybutton"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FFC78E"
-            android:fontFamily="@font/myfont"
-            android:text="登出"
-            android:textSize="25sp"
-            android:layout_alignParentBottom="true"/>
+            android:layout_below="@+id/frame"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/button_2"
+            android:text="@string/_800_exp"
+            android:textColor="#FF0080"
+            android:textStyle="italic"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/frame"
+            android:layout_marginTop="62dp"
+            android:layout_toEndOf="@+id/button_date"
+            android:text="@string/_300_exp"
+            android:textColor="#FF0080"
+            android:textStyle="italic"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:id="@+id/text_add10"
+            android:layout_toEndOf="@+id/gif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF0080"
+            android:text=""
+            android:layout_below="@+id/gif"
+            android:textStyle="italic"
+            />
+
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gif"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/frame"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="65dp"
+            android:src="@drawable/doglove" />
+
+        <ImageView
+            android:id="@+id/love2"
+            android:layout_toEndOf="@+id/gif"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@+id/frame"
+            android:layout_marginTop="67dp"
+            android:contentDescription="@string/狗狗愛心" />
+
+
 
     </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/gameframe"
+        android:layout_weight="30"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/mylayout"
+        android:layout_marginHorizontal="75dp"
+       >
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_weight="12"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/button22"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/mylayout3"
+                android:text="@string/登出"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="1dp"
+
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 
 </LinearLayout>
