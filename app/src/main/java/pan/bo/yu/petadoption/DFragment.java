@@ -71,7 +71,6 @@ public class DFragment extends Fragment {
 
     //測試
     HorizontalProgressView horizontalProgressView;
-    int i = 0;
     FrameLayout gameframe;
     SoundPool soundPool;
     int soundID;
@@ -283,7 +282,11 @@ public class DFragment extends Fragment {
                         }
                     });
                 }
+                if(mRewardedAd==null){
+                    Toast.makeText(getActivity(), "出錯了,很抱歉找不到合適的廣告 請稍晚在試看看", Toast.LENGTH_SHORT).show();
+                    loadRewardedAd();
 
+                }
 
             }
         });
@@ -296,13 +299,14 @@ public class DFragment extends Fragment {
     public void loadRewardedAd(){
 
         AdRequest adRequest2 = new AdRequest.Builder().build();
+//       測試ID ca-app-pub-3940256099942544/5224354917
         RewardedAd.load(getActivity(), "ca-app-pub-4133015411524559/6320420329",
                 adRequest2, new RewardedAdLoadCallback() {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
 
                         mRewardedAd=null;
-                        Log.d("result", loadAdError.getMessage());
+                        Log.d("aaa","激勵廣告家仔失敗:" +loadAdError.getMessage());
 
                     }
 
@@ -310,7 +314,7 @@ public class DFragment extends Fragment {
                     public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
 
                         mRewardedAd=rewardedAd;
-                        Log.d("result", "Ad was loaded.");
+                        Log.d("aaa", "激勵廣告家載成功Ad was loaded.");
                     }
                 });
 
@@ -319,15 +323,22 @@ public class DFragment extends Fragment {
         ImageView iv = new ImageView(getApplicationContext());
         iv.setImageResource(R.drawable.hamburger);
 
+
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(90, 90);
         params.topMargin = 50;
         params.leftMargin = 50;
         gameframe.addView(iv, params);
 
+
+
+
+
+
         //點選圖片
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 int rundom, rundom2;
                 rundom = (int) (Math.random() * 5 + 1);

@@ -538,18 +538,18 @@ public class AFragment extends Fragment {
             if (position == 0) {
 
                 holder.imageView.setImageResource(R.drawable.load_66);
-                Glide.with(getActivity()).load(arrayList.get(position)).placeholder(R.drawable.ic_loading).into(holder.imageView);
+                Glide.with(getActivity()).load(arrayList.get(position)).error(R.drawable.load_66).placeholder(R.drawable.ic_loading).into(holder.imageView);
 
             }
             if (position == 1) {
 
                 holder.imageView.setImageResource(R.drawable.load_66);
-                Glide.with(getActivity()).load(arrayList.get(position)).placeholder(R.drawable.load_66).into(holder.imageView);
+                Glide.with(getActivity()).load(arrayList.get(position)).error(R.drawable.load_66).placeholder(R.drawable.ic_loading).into(holder.imageView);
             }
             if (position == 2) {
 
                 holder.imageView.setImageResource(R.drawable.load_66);
-                Glide.with(getActivity()).load(arrayList.get(position)).placeholder(R.drawable.load_66).into(holder.imageView);
+                Glide.with(getActivity()).load(arrayList.get(position)).error(R.drawable.load_66).placeholder(R.drawable.ic_loading).into(holder.imageView);
             }
 
 

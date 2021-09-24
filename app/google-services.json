@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "327606330596",
+    "firebase_url": "https://petadoption-c1201-default-rtdb.firebaseio.com",
     "project_id": "petadoption-c1201",
     "storage_bucket": "petadoption-c1201.appspot.com"
   },
@@ -14,20 +15,32 @@
       },
       "oauth_client": [
         {
-          "client_id": "327606330596-es14gf83dgqv7bad5givr8k1bsm0e8mi.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "327606330596-pj4tjbdln2hdnn2pkbi80nndmeo28h2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pan.bo.yu.petadoption",
+            "certificate_hash": "52fd2d475ad3025a803ae1b0cee1af76cf352852"
+          }
+        },
+        {
+          "client_id": "327606330596-sb7vom1eb9a6e1pi0dsvl95tmfc60398.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pan.bo.yu.petadoption",
+            "certificate_hash": "cb8f48aeeb9d9d013750003ba4f184ef5035a0ab"
+          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCxcqcQI77j_qOGEMtNe1KcmMznskdiQyY"
+          "current_key": "AIzaSyBgu17OGH0KUHJne_RksMXUq1fjHHZSwO0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "327606330596-es14gf83dgqv7bad5givr8k1bsm0e8mi.apps.googleusercontent.com",
+              "client_id": "327606330596-hrkl4l7jc7he4v90oku3lfdju43d88v7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

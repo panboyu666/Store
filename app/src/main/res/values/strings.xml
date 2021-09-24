@@ -2,7 +2,7 @@
     <string name="app_name">領養毛小孩</string>
     <string name="facebook_app_id">529595761429381</string>
     <string name="fb_login_protocol_scheme">fb529595761429381</string>
-
+    <string name="default_web_client_id">327606330596-hrkl4l7jc7he4v90oku3lfdju43d88v7.apps.googleusercontent.com</string>
     <string name="sp_name">選擇種類</string>
     <string name="分隔線">分隔線</string>
     <string name="首頁">首頁</string>

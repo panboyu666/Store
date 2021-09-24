@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_Design_Light_NoActionBar);
 
+        Log.w("aaa","摁亨1");
 
         SharedPreferences sp = getSharedPreferences("pet", MODE_PRIVATE);
 
@@ -105,9 +106,10 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.Theme_Design_Light_NoActionBar);
         super.onCreate(savedInstanceState);
 
-
+        Log.w("aaa","userID摁亨2"+userID);
         if (userID != null) {
 
+            Log.w("aaa","摁亨2");
             //放在這邊原因 第一次開啟時 登入畫面會閃一下本活動 所以先判斷是否有帳戶登入再載入本活動
             setContentView(R.layout.activity_main);
 
